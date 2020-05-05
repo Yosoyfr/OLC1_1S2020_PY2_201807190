@@ -1,0 +1,100 @@
+// lexical grammar
+
+%lex
+%options ranges
+
+[0-9]+("."[0-9]+)?\b    return 'DECIMAL';
+[0-9]+\b                return 'ENTERO';
+BSL               "\\".
+%s                comment
+
+%%
+
+
+<comment>.            
+\s+                   
+
+//Signos de la sintaxis de metodos, funciones, declaraciones, etc
+"{"                   return 'LLAVE_IZQUIERDA'; 
+"}"                   return 'LLAVE_DERECHA';
+"("                   return 'PARENTESIS_IZQUIERDO';
+")"                   return 'PARENTESIS_DERECHO';
+","                   return 'COMA';
+":"                   return 'DOS_PUNTOS';
+";"                   return 'PUNTO_COMA';
+
+//Reservadas de print
+"System.out.println"  return "RESERVADA_PRINT";
+"System.out.print"  return "RESERVADA_PRINT";
+
+//Reservada main
+"main"                return 'RESERVADA_MAIN';
+
+//Para metodos void
+"void"                return 'RESERVADA_VOID';
+
+//Palabras reservadas 
+"import"              return 'RESERVADA_IMPORT';
+"if"                  return 'RESERVADA_IF';
+"else"                return 'RESERVADA_ELSE';
+"while"               return 'RESERVADA_WHILE';
+"do"                  return 'RESERVADA_DO';
+"for"                 return 'RESERVADA_FOR';
+"break"               return 'RESERVADA_BREAK';
+"continue"            return 'RESERVADA_CONTINUE';
+"switch"              return 'RESERVADA_SWITCH';
+"case"                return 'RESERVADA_CASE';
+"default"             return 'RESERVADA_DEFAULT';
+"class"               return 'RESERVADA_CLASS';
+"return"              return 'RESERVADA_RETURN';
+
+//Reservadas booleanas
+"true"                return 'TRUE_LITERAL';
+"false"               return 'FALSE_LITERAL';
+
+
+//Tipos de datos
+"boolean"             return 'PRIMITIVA_BOOLEAN';
+"int"                 return 'PRIMITIVA_INT';
+"double"              return 'PRIMITIVA_DOUBLE';
+"String"              return 'PRIMITIVA_STRING';
+"char"              return 'PRIMITIVA_CHAR';
+
+//Signos del lenguaje
+"<="                  return 'OPERADOR_MENOR_IGUAL_QUE';
+"<"                   return 'OPERADOR_MENOR_QUE';
+"=="                  return 'OPERADOR_IGUAL_IGUAL';
+">="                  return 'OPERADOR_MAYOR_IGUAL_QUE';
+">"                   return 'OPERADOR_MAYOR_QUE';
+"!="                  return 'OPERADOR_NO_IGUAL';
+"||"                  return 'OPERADOR_OR';
+"&&"                  return 'OPERADOR_AND';
+"!"                   return 'OPERADOR_NOT';
+"="                   return 'OPERADOR_IGUAL';
+"++"                  return 'OPERADOR_INCREMENTO';
+"+"                   return 'OPERADOR_SUMA';
+"--"                  return 'OPERADOR_DECREMENTO';
+"-"                   return 'OPERADOR_RESTA';
+"*"                   return 'OPERADOR_MULTIPLICACION';
+"/"                   return 'OPERADOR_DIVISON';
+"."                   return 'PUNTO';
+
+[a-zA-Z][a-zA-Z0-9_]*   return 'IDENTIFICADOR';
+"\"\""                return 'STRING_LITERAL';
+"\""([^"]|{BSL})*"\"" return 'STRING_LITERAL';
+
+<<EOF>>               return 'EOF';
+.                     return 'INVALID';
+
+/lex
+
+%right OPERADOR_IGUAL
+%right TERNARY
+%left OPERADOR_OR
+%left OPERADOR_AND
+%left OPERADOR_IGUAL_IGUAL OPERADOR_NO_IGUAL
+%left OPERADOR_MENOR_QUE OPERADOR_MAYOR_QUE OPERADOR_MENOR_IGUAL_QUE OPERADOR_MAYOR_IGUAL_QUE
+%left OPERADOR_SUMA OPERADOR_RESTA
+%left OPERADOR_MULTIPLICACION OPERADOR_DIVISON
+%right OPERADOR_NOT
+%right OPERADOR_INCREMENTO OPERADOR_DECREMENTO

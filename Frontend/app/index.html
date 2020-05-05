@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="bootstrap.css" />
+  <title>ANTENNAE Java</title>
+  <script src="https://kit.fontawesome.com/97019646c2.js"></script>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">OLC1 <i class="fab fa-font-awesome-flag fa-lg"></i></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+      aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!--Botones del navbar-->
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav mr-auto">
+        <!--Menu de archivo-->
+        <li class="nav-item">
+          <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+            <a class="nav-link" href="#">Archivo <i class="fas fa-file fa-lg"></i></a>
+            <div class="btn-group" role="group">
+              <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false"></button>
+              <!--Opciones del menu-->
+              <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                <label for="file-input" class="dropdown-item">Abrir <i class="fas fa-file-upload fa-lg"></i></label>
+                <input type="file" id="file-input" style="display: none;" accept=".cs" />
+                <a class="dropdown-item" href="#" onclick="saveFiles()" id="save-file">Guardar <i
+                    class="fas fa-file-download fa-lg"></i></a>
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal-save">Guardar como... <i
+                    class="fas fa-file-export fa-lg"></i></a>
+                <a class="dropdown-item" href="#" id="btn-window" onclick="addWindow()">Agregar pestaña <i
+                    class="fas fa-plus"></i></a>
+              </div>
+            </div>
+          </div>
+        </li>
+        <!--Menu de reportes-->
+        <li class="nav-item">
+          <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+            <a class="nav-link" href="#">Reportes <i class="fas fa-file-code fa-lg"></i></a>
+            <div class="btn-group" role="group">
+              <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false"></button>
+              <!--Opciones del menu-->
+              <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                <a class="dropdown-item" href="#" onclick="openPython()">Archivo.py <i
+                    class="fab fa-python fa-lg"></i></a>
+                <a class="dropdown-item" href="#" onclick="openHtml()">Archivo.html <i
+                    class="fab fa-html5 fa-lg"></i></a>
+                <a class="dropdown-item" href="#" onclick="openJson()">Archivo.json <i
+                    class="fab fa-node-js fa-lg"></i></a>
+                <a class="dropdown-item" href="#" onclick="downloadPython()">Download Python <i
+                    class="fab fa-python fa-lg"></i></a>
+                <a class="dropdown-item" href="#" onclick="downloadHtml()">Download HTML <i
+                    class="fab fa-html5 fa-lg"></i></a>
+                <a class="dropdown-item" href="#" onclick="downloadJson()">Download JSON <i
+                    class="fab fa-node-js fa-lg"></i></a>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" id="btn-analizar" onclick="run()">Run <i
+              class="fas fa-play-circle fa-lg"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" id="btn-analizar" onclick="printTokens()">Tokens <i
+              class="fab fa-typo3 fa-lg"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-toggle="modal" data-target="#myModal">About <i
+              class="fab fa-creative-commons-by fa-lg"></i></a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="jumbotron">
+    <ul class="nav nav-tabs border-primary" id="myTabs">
+      <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#p1" onclick="changeTab('txt1')">Pestaña 1</a>
+      </li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+      <div class="tab-pane fade show active" id="p1">
+        <div class="list-group" id="txt1" style="height: 400px; position: relative;"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.9/ace.js" type="text/javascript" charset="utf-8"></script>
+  <script>
+    var editor = ace.edit("txt1");
+    editor.setTheme("ace/theme/dracula");
+    editor.session.setMode("ace/mode/java");
+    editor.setFontSize("14px");
+  </script>
+
+  <script src="app.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
