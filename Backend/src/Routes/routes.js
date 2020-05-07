@@ -9,4 +9,8 @@ router.get("/send", (req, res) => {
   res.send({ Title: "Send" });
 });
 
+router.post("/parser", (req, res) => {
+  console.log(req.body);
+});
+
 module.exports = router;
