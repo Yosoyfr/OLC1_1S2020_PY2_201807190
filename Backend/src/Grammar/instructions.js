@@ -1,45 +1,47 @@
 // Constantes para los tipos de 'valores' que reconoce nuestra gramática.
 const TIPO_VALOR = {
-  NUMERO: "VAL_NUMERO",
-  IDENTIFICADOR: "VAL_IDENTIFICADOR",
-  CADENA: "VAL_CADENA",
+  NUMERO: "V_NUMERO",
+  IDENTIFICADOR: "V_IDENTIFICADOR",
+  CADENA: "V_CADENA",
+  CARACTER: "V_CHAR",
+  BOOLEANO: "V_BOOLEANO",
 };
 
-// Constantes para los tipos de 'operaciones' que soporta nuestra gramática.
-const TIPO_OPERACION = {
+// Constantes para los tipos de 'opes' que soporta nuestra gramática.
+const TIPO_OP = {
   SUMA: "OP_SUMA",
   RESTA: "OP_RESTA",
   MULTIPLICACION: "OP_MULTIPLICACION",
   DIVISION: "OP_DIVISION",
+  POTENCIA: "OP_POTENCIA",
+  MODULO: "OP_MODULO",
   NEGATIVO: "OP_NEGATIVO",
+  INCREMENTO: "OP_INCREMENTO",
+  DECREMENTO: "OP_DECREMENTO",
   MAYOR_QUE: "OP_MAYOR_QUE",
   MENOR_QUE: "OP_MENOR_QUE",
-
-  MAYOR_IGUAL: "OP_MAYOR_IGUAL",
-  MENOR_IGUAL: "OP_MENOR_IGUAL",
-  DOBLE_IGUAL: "OP_DOBLE_IGUAL",
-  NO_IGUAL: "OP_NO_IGUAL",
-
+  MAYOR_IGUAL_QUE: "OP_MAYOR_IGUAL_QUE",
+  MENOR_IGUAL_QUE: "OP_MENOR_IGUAL_QUE",
+  IGUALDAD: "OP_IGUALDAD",
+  DISTINTO: "OP_DISTION",
   AND: "OP_AND",
   OR: "OP_OR",
   NOT: "OP_NOT",
-
-  CONCATENACION: "OP_CONCATENACION",
 };
 
 // Constantes para los tipos de 'instrucciones' válidas en nuestra gramática.
 const TIPO_INSTRUCCION = {
-  IMPRIMIR: "INSTR_IMPRIMIR",
-  MIENTRAS: "INSTR_MIENTRAS",
-  DECLARACION: "INSTR_DECLARACION",
-  ASIGNACION: "INSTR_ASIGANCION",
-  IF: "INSTR_IF",
-  IF_ELSE: "INSTR_ELSE",
-  PARA: "INST_PARA",
-  SWITCH: "SWITCH",
-  SWITCH_OP: "SWITCH_OP",
-  SWITCH_DEF: "SWITCH_DEF",
-  ASIGNACION_SIMPLIFICADA: "ASIGNACION_SIMPLIFICADA",
+  IMPORT: "INST_IMPORT",
+  CLASS: "INST_CLASS",
+  DECLARACION: "INST_DECLARACION",
+  ASIGNACION: "INST_ASIGANCION",
+  IF: "INST_IF",
+  ELSE: "INST_ELSE",
+  SWITCH: "INST_SWITCH",
+  WHILE: "INST_WHILE",
+  DO: "INST_DO",
+  FOR: "INST_FOR",
+  PRINT: "INST_PRINT",
 };
 
 // Constantes para los tipos de OPCION_SWITCH validas en la gramática
@@ -56,7 +58,7 @@ const TIPO_OPCION_SWITCH = {
  * @param {*} operandoDer
  * @param {*} tipo
  */
-function nuevaOperacion(operandoIzq, operandoDer, tipo) {
+function nuevaOp(operandoIzq, operandoDer, tipo) {
   return {
     operandoIzq: operandoIzq,
     operandoDer: operandoDer,
@@ -65,26 +67,26 @@ function nuevaOperacion(operandoIzq, operandoDer, tipo) {
 }
 
 /**
- * El objetivo de esta API es proveer las funciones necesarias para la construcción de operaciones e instrucciones.
+ * El objetivo de esta API es proveer las funciones necesarias para la construcción de opes e instrucciones.
  */
 const instruccionesAPI = {
   /**
-   * Crea un nuevo objeto tipo Operación para las operaciones binarias válidas.
+   * Crea un nuevo objeto tipo Operación para las opes binarias válidas.
    * @param {*} operandoIzq
    * @param {*} operandoDer
    * @param {*} tipo
    */
-  nuevoOperacionBinaria: function (operandoIzq, operandoDer, tipo) {
-    return nuevaOperacion(operandoIzq, operandoDer, tipo);
+  nuevoOpBinaria: function (operandoIzq, operandoDer, tipo) {
+    return nuevaOp(operandoIzq, operandoDer, tipo);
   },
 
   /**
-   * Crea un nuevo objeto tipo Operación para las operaciones unarias válidas
+   * Crea un nuevo objeto tipo Operación para las opes unarias válidas
    * @param {*} operando
    * @param {*} tipo
    */
-  nuevoOperacionUnaria: function (operando, tipo) {
-    return nuevaOperacion(operando, undefined, tipo);
+  nuevoOpUnaria: function (operando, tipo) {
+    return nuevaOp(operando, undefined, tipo);
   },
 
   /**
@@ -279,7 +281,7 @@ const instruccionesAPI = {
 };
 // Exportamos nuestras constantes y nuestra API
 
-module.exports.TIPO_OPERACION = TIPO_OPERACION;
+module.exports.TIPO_OP = TIPO_OP;
 module.exports.TIPO_INSTRUCCION = TIPO_INSTRUCCION;
 module.exports.TIPO_VALOR = TIPO_VALOR;
 module.exports.instruccionesAPI = instruccionesAPI;

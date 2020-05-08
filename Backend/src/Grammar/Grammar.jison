@@ -9,57 +9,77 @@
 
 %%
 
-\s+											// se ignoran espacios en blanco
-"//".*										// comentario simple línea
-[/][*][^*]*[*]+([^/*][^*]*[*]+)*[/]			// comentario multiple líneas
+\s+											// Espacios en blanco
+"//".*										// Comentario de linea
+[/][*][^*]*[*]+([^/*][^*]*[*]+)*[/]			// Comentario multilina
 
-"imprimir"			return 'RIMPRIMIR';
-"numero"			return 'RNUMERO';
-"string"			return 'RSTRING';
-"mientras"			return 'RMIENTRAS';
+//Tipos de datos
+"int"			return 'RINT';
+"double"			return 'RDOUBLE';
+"boolean"			return 'RBOOLEAN';
+"char"			return 'RCHAR';
+"String"			return 'RSTRING';
+
+//Palabras reservadas 
+"true"							return "RTRUE";
+"false"							return "RFALSE";
 "if"				return 'RIF';
 "else"				return 'RELSE';
-"para"				return 'RPARA';
 "switch"			return 'RSWITCH';
 "case"				return 'RCASE';
 "default"			return 'RDEFAULT';
 "break"				return 'RBREAK';
+"while"				return 'RWHILE';
+"do"				return 'RDO';
+"for"				return 'RFOR';
+"continue"				return 'RCONTINUE';
+"return"				return 'RRETURN';
+"System.out.println"	return "RPRINT";
+"System.out.print"		return "RPRINT";
+"class"			return 'RCLASS';
+"import"			return 'RIMPORT';
+"main"			return 'RMAIN';
+"void"			return 'RVOID';
 
-":"					return 'DOSPTS';
-";"					return 'PTCOMA';
-"{"					return 'LLAVIZQ';
-"}"					return 'LLAVDER';
-"("					return 'PARIZQ';
-")"					return 'PARDER';
+//Operaciones aritmeticas
+"++"				return 'INCREMENTO';
+"+"					return 'SUMA';
+"--"				return 'DECREMENTO';
+"-"					return 'RESTA';
+"*"					return 'MULTIPLICACION';
+"/"					return 'DIVISION';
+"^"					return 'POTENCIA';
+"%"					return 'MODULO';
 
-"+="				return 'O_MAS';
-"-="				return 'O_MENOS';
-"*="				return 'O_POR';
-"/="				return 'O_DIVIDIDO';
+//Operciones relaciones
+"=="				return 'IGUALDAD';
+"!="				return 'DISTINTO';
+">="				return 'MAYORIGUALQUE';
+">"					return 'MAYORQUE';
+"<="				return 'MENORIGUALQUE';
+"<"					return 'MENORQUE';
+
+//Operaciones logicas
 "&&"				return 'AND'
 "||"				return 'OR';
-
-"+"					return 'MAS';
-"-"					return 'MENOS';
-"*"					return 'POR';
-"/"					return 'DIVIDIDO';
-"&"					return 'CONCAT';
-
-"<="				return 'MENIGQUE';
-">="				return 'MAYIGQUE';
-"=="				return 'DOBLEIG';
-"!="				return 'NOIG';
-
-"<"					return 'MENQUE';
-">"					return 'MAYQUE';
-"="					return 'IGUAL';
-
 "!"					return 'NOT';
 
-\"[^\"]*\"				{ yytext = yytext.substr(1,yyleng-2); return 'CADENA'; }
-[0-9]+("."[0-9]+)?\b  	return 'DECIMAL';
-[0-9]+\b				return 'ENTERO';
-([a-zA-Z])[a-zA-Z0-9_]*	return 'IDENTIFICADOR';
+//Simbolos del lenguaje
+"{"					return 'LLAVEIZQUIERDA';
+"}"					return 'LLAVEDERECHA';
+"("					return 'PARENTESISIZQUIERDO';
+")"					return 'PARENTESISDERECHO';
+";"					return 'PUNTOYCOMA';
+","					return 'COMA';
+"="					return 'IGUAL';
+":"					return 'DOSPUNTOS';
+
+
+//"\""([^"]|{BSL})*"\"" return 'STRING_LITERAL';
+\"([^\\\"]|\\.)*\"				{ yytext = yytext.substr(1,yyleng-2); return 'CADENA'; }
+\'([^\\\"]|\\.)\'				{ yytext = yytext.substr(1,yyleng-2); return 'CARACTER'; }
+[0-9]+("."[0-9]+)?\b  	return 'NUMERO';
+([a-zA-Z_])[a-zA-Z0-9_]*	return 'IDENTIFICADOR';
 
 
 <<EOF>>				return 'EOF';
@@ -67,112 +87,239 @@
 
 /lex
 
-
-%{
-	const TIPO_OPERACION	= require('./instrucciones').TIPO_OPERACION;
-	const TIPO_VALOR 		= require('./instrucciones').TIPO_VALOR;
-	const TIPO_DATO			= require('./tabla_simbolos').TIPO_DATO; //para jalar el tipo de dato
-	const instruccionesAPI	= require('./instrucciones').instruccionesAPI;
-%}
-
-
 /* Asociación de operadores y precedencia */
-%left 'CONCAT'
-%left 'MAS' 'MENOS'
-%left 'POR' 'DIVIDIDO'
-%left UMENOS
 
-%start ini
+%left 'AND' 'OR'
+%left 'IGUALDAD' 'DISTINTO'
+%left 'MENORQUE' 'MENORIGUALQUE' 'MAYORQUE' 'MAYORIGUALQUE'
+%left 'SUMA' 'RESTA'
+%left 'MULTIPLICACION' 'DIVISION'
+%left 'POTENCIA' 'MODULO'
+%left UMENOS
+%right 'NOT'
+%right 'INCREMENTO' 'DECREMENTO'
+
+%start INICIO
 
 %% /* Definición de la gramática */
 
-ini
-	: instrucciones EOF {
-		// cuado se haya reconocido la entrada completa retornamos el AST
-		return $1;
-	}
-;
-
-instrucciones
-	: instrucciones instruccion 	{ $1.push($2); $$ = $1; }
-	| instruccion					{ $$ = [$1]; }
-;
-
-instruccion
-	: RIMPRIMIR PARIZQ expresion_cadena PARDER PTCOMA	{ $$ = instruccionesAPI.nuevoImprimir($3); }
-	| RMIENTRAS PARIZQ expresion_logica PARDER LLAVIZQ instrucciones LLAVDER
-														{ $$ = instruccionesAPI.nuevoMientras($3, $6); }
-	| RPARA PARIZQ IDENTIFICADOR IGUAL expresion_numerica PTCOMA expresion_logica PTCOMA IDENTIFICADOR MAS MAS PARDER LLAVIZQ instrucciones LLAVDER
-														{ $$ = instruccionesAPI.nuevoPara($3,$5,$7,$9,$14) }
-	| RNUMERO IDENTIFICADOR PTCOMA						{ $$ = instruccionesAPI.nuevoDeclaracion($2, TIPO_DATO.NUMERO); }
-	| RSTRING IDENTIFICADOR PTCOMA						{ $$ = instruccionesAPI.nuevoDeclaracion($2, TIPO_DATO.STRING); }
-	| IDENTIFICADOR IGUAL expresion_cadena PTCOMA		{ $$ = instruccionesAPI.nuevoAsignacion($1, $3); } //esto soporta expresiones_cadena y expresion_numerica
-
-	| RIF PARIZQ expresion_logica PARDER LLAVIZQ instrucciones LLAVDER
-														{ $$ = instruccionesAPI.nuevoIf($3, $6); }
-	| RIF PARIZQ expresion_logica PARDER LLAVIZQ instrucciones LLAVDER RELSE LLAVIZQ instrucciones LLAVDER
-														{ $$ = instruccionesAPI.nuevoIf($3, $6, $10); }
-
-	| RSWITCH PARIZQ expresion_numerica PARDER LLAVIZQ casos LLAVDER
-		{ $$ = instruccionesAPI.nuevoSwitch($3,$6);}
-	| IDENTIFICADOR operadores expresion_numerica PTCOMA	
-	                                                    { $$ = instruccionesAPI.nuevoAsignacionSimplificada($1, $2, $3); }
+INICIO
+	: EOF
+	| IMPORTS CLASS EOF
+	| CLASS EOF
 	| error { console.error('Este es un error sintáctico: ' + yytext + ', en la linea: ' + this._$.first_line + ', en la columna: ' + this._$.first_column); }
 ;
 
-casos : casos caso_evaluar
-    {
-      $1.push($2);
-	  $$ = $1;
-    }
-  | caso_evaluar
-  	{ $$ = instruccionesAPI.nuevoListaCasos($1);}
+INSTRUCCIONES
+	: INSTRUCCIONES INSTRUCCION 	
+	| INSTRUCCION					
 ;
 
-caso_evaluar : RCASE expresion_numerica DOSPTS instrucciones
-    { $$ = instruccionesAPI.nuevoCaso($2,$4); }
-  | RDEFAULT DOSPTS instrucciones
-    { $$ = instruccionesAPI.nuevoCasoDef($3); }
+INSTRUCCION
+	: IF
+	| SWITCH
+	| WHILE
+	| DO_WHILE
+	| FOR
+	| LLAMADAFUNCIONES
+	| BREAK
+	| RETURN
+	| CONTINUE
+	| PRINT
+	| DECLARACION
+	| ASIGNACION   
+	;
+
+IMPORTS 
+	: IMPORTS RIMPORT IDENTIFICADOR PUNTOYCOMA
+	| RIMPORT IDENTIFICADOR PUNTOYCOMA
+	;
+
+CLASS
+	: CLASS CLASSP
+	| CLASSP
+	;
+
+CLASSP
+	: RCLASS IDENTIFICADOR BLOQUE_CLASE
+	;
+
+BLOQUE_CLASE
+	: LLAVEIZQUIERDA BLOQUE_CLASEP LLAVEDERECHA
+	| LLAVEIZQUIERDA LLAVEDERECHA
+	;
+
+BLOQUE_CLASEP
+	: BLOQUE_CLASEP BLOQUE_CLASEPP 
+	| BLOQUE_CLASEPP
+	;
+
+BLOQUE_CLASEPP
+	: DECLARACION
+	| METODOS
+	;
+
+METODOS
+	: TIPOMETODO BLOQUE_METODO
+	;
+
+BLOQUE_METODO
+	:	LLAVEIZQUIERDA INSTRUCCIONES LLAVEDERECHA
+	|	LLAVEIZQUIERDA  LLAVEDERECHA
+	;
+
+TIPOMETODO
+	: TIPO IDENTIFICADOR ASIGNACIONPARAMETROS
+	| RVOID IDENTIFICADOR ASIGNACIONPARAMETROS
+	| RVOID RMAIN PARENTESISIZQUIERDO PARENTESISDERECHO
+	;
+
+ASIGNACIONPARAMETROS
+	: PARENTESISIZQUIERDO LISTAPARAMETROS PARENTESISDERECHO
+	| PARENTESISIZQUIERDO PARENTESISDERECHO
+	;
+
+LISTAPARAMETROS
+	: LISTAPARAMETROS COMA PARAMETROS
+	| PARAMETROS
+	;
+
+PARAMETROS
+	: TIPO IDENTIFICADOR
+	;
+
+PRINT
+	:RPRINT PARENTESISIZQUIERDO EXPRESION PARENTESISDERECHO PUNTOYCOMA
+	;
+
+DECLARACION 
+	: TIPO DECLARACIONP PUNTOYCOMA
+	;
+
+DECLARACIONP 
+	: DECLARACIONP COMA DECLARACIONPP
+	| DECLARACIONPP
+	;
+
+DECLARACIONPP
+	: IDENTIFICADOR IGUAL EXPRESION
+	| IDENTIFICADOR 
+	;
+
+ASIGNACION 
+	: IDENTIFICADOR IGUAL EXPRESION PUNTOYCOMA
+	| INC_DEC PUNTOYCOMA
 ;
 
-operadores
-    : O_MAS      { $$ = instruccionesAPI.nuevoOperador(TIPO_OPERACION.SUMA); }
-	| O_MENOS    { $$ = instruccionesAPI.nuevoOperador(TIPO_OPERACION.RESTA); }
-    | O_POR      { $$ = instruccionesAPI.nuevoOperador(TIPO_OPERACION.MULTIPLICACION); }
-	| O_DIVIDIDO { $$ = instruccionesAPI.nuevoOperador(TIPO_OPERACION.DIVISION); }
+INC_DEC 
+	: IDENTIFICADOR INCREMENTO
+	| IDENTIFICADOR DECREMENTO
 ;
 
-
-expresion_numerica
-	: MENOS expresion_numerica %prec UMENOS				{ $$ = instruccionesAPI.nuevoOperacionUnaria($2, TIPO_OPERACION.NEGATIVO); }
-	| expresion_numerica MAS expresion_numerica			{ $$ = instruccionesAPI.nuevoOperacionBinaria($1, $3, TIPO_OPERACION.SUMA); }
-	| expresion_numerica MENOS expresion_numerica		{ $$ = instruccionesAPI.nuevoOperacionBinaria($1, $3, TIPO_OPERACION.RESTA); }
-	| expresion_numerica POR expresion_numerica			{ $$ = instruccionesAPI.nuevoOperacionBinaria($1, $3, TIPO_OPERACION.MULTIPLICACION); }
-	| expresion_numerica DIVIDIDO expresion_numerica	{ $$ = instruccionesAPI.nuevoOperacionBinaria($1, $3, TIPO_OPERACION.DIVISION); }
-	| PARIZQ expresion_numerica PARDER					{ $$ = $2; }
-	| ENTERO											{ $$ = instruccionesAPI.nuevoValor(Number($1), TIPO_VALOR.NUMERO); }
-	| DECIMAL											{ $$ = instruccionesAPI.nuevoValor(Number($1), TIPO_VALOR.NUMERO); }
-	| IDENTIFICADOR										{ $$ = instruccionesAPI.nuevoValor($1, TIPO_VALOR.IDENTIFICADOR); }
+TIPO 
+	: RINT
+  | RDOUBLE
+  | RBOOLEAN
+	| RSTRING
+	| RCHAR
 ;
 
-expresion_cadena
-	: expresion_cadena CONCAT expresion_cadena			{ $$ = instruccionesAPI.nuevoOperacionBinaria($1, $3, TIPO_OPERACION.CONCATENACION); }
-	| CADENA											{ $$ = instruccionesAPI.nuevoValor($1, TIPO_VALOR.CADENA); }
-	| expresion_numerica								{ $$ = $1; }
-;
+EXPRESION 
+	: RESTA EXPRESION %prec UMENOS	
+	|	NOT EXPRESION	
+  | EXPRESION SUMA EXPRESION		  
+  | EXPRESION RESTA EXPRESION		    
+  | EXPRESION MULTIPLICACION EXPRESION		    
+  | EXPRESION DIVISION EXPRESION	
+	| EXPRESION MODULO EXPRESION	
+	| EXPRESION POTENCIA EXPRESION	
+	| EXPRESION AND EXPRESION	
+	| EXPRESION OR EXPRESION	
+	| EXPRESION IGUALDAD EXPRESION	
+	| EXPRESION DISTINTO EXPRESION	
+	| EXPRESION MENORIGUALQUE EXPRESION	
+	| EXPRESION MENORQUE EXPRESION	
+	| EXPRESION MAYORIGUALQUE EXPRESION	
+	| EXPRESION MAYORQUE EXPRESION	
+	| NUMERO	 				    
+  | RTRUE				    
+  | RFALSE				    
+  | CADENA			    
+	| CARACTER			    
+  | IDENTIFICADOR PARENTESISIZQUIERDO LISTAEXPRESIONES PARENTESISDERECHO
+	| IDENTIFICADOR PARENTESISIZQUIERDO PARENTESISDERECHO
+	| IDENTIFICADOR
+  | PARENTESISIZQUIERDO EXPRESION PARENTESISDERECHO		  
+  ;	
 
-expresion_relacional
-	: expresion_numerica MAYQUE expresion_numerica		{ $$ = instruccionesAPI.nuevoOperacionBinaria($1, $3, TIPO_OPERACION.MAYOR_QUE); }
-	| expresion_numerica MENQUE expresion_numerica		{ $$ = instruccionesAPI.nuevoOperacionBinaria($1, $3, TIPO_OPERACION.MENOR_QUE); }
-	| expresion_numerica MAYIGQUE expresion_numerica	{ $$ = instruccionesAPI.nuevoOperacionBinaria($1, $3, TIPO_OPERACION.MAYOR_IGUAL); }
-	| expresion_numerica MENIGQUE expresion_numerica	{ $$ = instruccionesAPI.nuevoOperacionBinaria($1, $3, TIPO_OPERACION.MENOR_IGUAL); }
-	| expresion_cadena DOBLEIG expresion_cadena			{ $$ = instruccionesAPI.nuevoOperacionBinaria($1, $3, TIPO_OPERACION.DOBLE_IGUAL); }
-	| expresion_cadena NOIG expresion_cadena			{ $$ = instruccionesAPI.nuevoOperacionBinaria($1, $3, TIPO_OPERACION.NO_IGUAL); }
-;
+LLAMADAFUNCIONES
+	:IDENTIFICADOR PARENTESISIZQUIERDO LISTAEXPRESIONES PARENTESISDERECHO PUNTOYCOMA
+	|IDENTIFICADOR PARENTESISIZQUIERDO PARENTESISDERECHO PUNTOYCOMA
+	;
 
-expresion_logica
-	: expresion_relacional AND expresion_relacional     { $$ = instruccionesAPI.nuevoOperacionBinaria($1, $3, TIPO_OPERACION.AND); }
-	| expresion_relacional OR expresion_relacional 		{ $$ = instruccionesAPI.nuevoOperacionBinaria($1, $3, TIPO_OPERACION.OR); }
-	| NOT expresion_relacional							{ $$ = instruccionesAPI.nuevoOperacionUnaria($2, TIPO_OPERACION.NOT); }
-	| expresion_relacional								{ $$ = $1; }
-;
+LISTAEXPRESIONES
+	:LISTAEXPRESIONES COMA EXPRESION
+	|EXPRESION
+	;
+
+IF 
+	: RIF CONDICION BLOQUE_INSTRUCCIONES
+  | RIF CONDICION BLOQUE_INSTRUCCIONES RELSE BLOQUE_INSTRUCCIONES
+	| RIF CONDICION BLOQUE_INSTRUCCIONES RELSE IF
+	;
+
+SWITCH
+	:RSWITCH PARENTESISIZQUIERDO EXPRESION PARENTESISDERECHO LLAVEIZQUIERDA CASES LLAVEDERECHA
+	;
+
+CASES
+	:CASES CASE_EVALUAR
+	|CASE_EVALUAR
+	;
+
+CASE_EVALUAR
+	:RCASE EXPRESION DOSPUNTOS INSTRUCCIONES
+	|RCASE EXPRESION DOSPUNTOS 
+	|RDEFAULT DOSPUNTOS INSTRUCCIONES
+	|RDEFAULT DOSPUNTOS 
+	;
+
+CONDICION 
+	: PARENTESISIZQUIERDO EXPRESION PARENTESISDERECHO	
+	;
+
+BLOQUE_INSTRUCCIONES 
+	: LLAVEIZQUIERDA INSTRUCCIONES LLAVEDERECHA 
+	| LLAVEIZQUIERDA  LLAVEDERECHA 
+  ;
+
+WHILE
+	: RWHILE CONDICION BLOQUE_INSTRUCCIONES
+	;
+
+DO_WHILE
+	: RDO BLOQUE_INSTRUCCIONES RWHILE CONDICION PUNTOYCOMA
+	;
+
+FOR
+	: RFOR PARENTESISIZQUIERDO DECLARACION  EXPRESION PUNTOYCOMA FORINC_DEC PARENTESISDERECHO BLOQUE_INSTRUCCIONES
+	| RFOR PARENTESISIZQUIERDO DECLARACIONP PUNTOYCOMA EXPRESION PUNTOYCOMA FORINC_DEC PARENTESISDERECHO BLOQUE_INSTRUCCIONES
+	;
+
+FORINC_DEC
+	: FORINC_DEC COMA INC_DEC 	
+	| INC_DEC					
+	;
+
+RETURN
+  : RRETURN EXPRESION PUNTOYCOMA
+  | RRETURN PUNTOYCOMA
+  ;
+
+BREAK
+  : RBREAK PUNTOYCOMA
+  ;
+
+CONTINUE
+  : RCONTINUE PUNTOYCOMA
+  ;
