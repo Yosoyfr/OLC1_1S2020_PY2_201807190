@@ -86,6 +86,11 @@
 
 /lex
 
+%{
+	const TIPO_OPERACION = require("../Instrucciones/intrucciones").TIPO_OPERACION;
+	const TIPO_VALOR 		= require("../Instrucciones/intrucciones").TIPO_VALOR;
+	const instruccionesAPI	= require("../Instrucciones/intrucciones").instruccionesAPI;
+%}
 /* Asociación de operadores y precedencia */
 
 %left 'AND' 'OR'
