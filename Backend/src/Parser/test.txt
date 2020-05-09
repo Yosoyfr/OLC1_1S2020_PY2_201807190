@@ -4,7 +4,6 @@ import Arbol_AVL;
 import Lista_Simple;
 import Tabla_Hash;
 import Login;  
-
 class OperacionDATA {
     int a = 5;
     String segundoParam = "Usted no \" anda fresco";
@@ -15,8 +14,12 @@ class OperacionDATA {
     int numero,no1 = 8, no2 = 4, no3;
     void main(){
         System.out.println("HOLA RES");
-				NoDevuelvoNada(b, c);
+		NoDevuelvoNada(b, c)
+        a = b;
         String frescura = funcion_string();
+        continue
+        break
+        int
         int frescura2 = - 5 * - funcion_int(no1, frescura) + 9;
     }
     void NoDevuelvoNada(){
@@ -80,7 +83,11 @@ class OperacionDATA {
             }
         }
         else{
-					System.out.println("USUARIO NO ENCOTRADO EN LA LISTA SIMPLE");
-					}
+			System.out.println("USUARIO NO ENCOTRADO EN LA LISTA SIMPLE");
+		}
     }
+}
+
+class OperacionDATA {
+
 }

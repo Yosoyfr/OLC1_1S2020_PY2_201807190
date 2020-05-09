@@ -74,8 +74,7 @@
 "="					return 'IGUAL';
 ":"					return 'DOSPUNTOS';
 
-
-//"\""([^"]|{BSL})*"\"" return 'STRING_LITERAL';
+//TIPOS DE EXPRESIONES YA SEAN NUMERICAS, CADENAS DE TEXTO, CARACTERES O IDENTIFICADORES
 \"([^\\\"]|\\.)*\"				{ yytext = yytext.substr(1,yyleng-2); return 'CADENA'; }
 \'([^\\\"]|\\.)\'				{ yytext = yytext.substr(1,yyleng-2); return 'CARACTER'; }
 [0-9]+("."[0-9]+)?\b  	return 'NUMERO';
@@ -103,6 +102,7 @@
 
 %% /* Definición de la gramática */
 
+//Metodo de inicio de la gramatica
 INICIO
 	: EOF
 	| IMPORTS CLASS EOF
@@ -110,11 +110,13 @@ INICIO
 	| error { console.error('Este es un error sintáctico: ' + yytext + ', en la linea: ' + this._$.first_line + ', en la columna: ' + this._$.first_column); }
 ;
 
+// Metodo de instrucciones
 INSTRUCCIONES
 	: INSTRUCCIONES INSTRUCCION 	
 	| INSTRUCCION					
 ;
 
+//Posibles instrucciones como if-else, switch, while, do-while, for, llamadas a funciones, print, etc.
 INSTRUCCION
 	: IF
 	| SWITCH
@@ -128,13 +130,21 @@ INSTRUCCION
 	| PRINT
 	| DECLARACION
 	| ASIGNACION   
+	| error PUNTOYCOMA { console.error('Este es un error sintáctico: ' + yytext + ', en la linea: ' + this._$.first_line + ', en la columna: ' + this._$.first_column); }
 	;
 
+//Imports de clases
 IMPORTS 
-	: IMPORTS RIMPORT IDENTIFICADOR PUNTOYCOMA
-	| RIMPORT IDENTIFICADOR PUNTOYCOMA
+	: IMPORTS RIMPORT IMPORT 
+	| RIMPORT IMPORT 
 	;
 
+IMPORT
+	:IDENTIFICADOR PUNTOYCOMA
+	|error PUNTOYCOMA { console.error('Este es un error sintáctico: ' + yytext + ', en la linea: ' + this._$.first_line + ', en la columna: ' + this._$.first_column); }
+	;
+
+//Metodo para el analisis de clases
 CLASS
 	: CLASS CLASSP
 	| CLASSP
@@ -144,6 +154,7 @@ CLASSP
 	: RCLASS IDENTIFICADOR BLOQUE_CLASE
 	;
 
+//Bloque de una clase identificada { Instrucciones }
 BLOQUE_CLASE
 	: LLAVEIZQUIERDA BLOQUE_CLASEP LLAVEDERECHA
 	| LLAVEIZQUIERDA LLAVEDERECHA
@@ -159,21 +170,25 @@ BLOQUE_CLASEPP
 	| METODOS
 	;
 
+//Metodos que pueden venir adentro del bloque de una clase
 METODOS
 	: TIPOMETODO BLOQUE_METODO
 	;
 
+//Bloque de instrucciones en un metodo
 BLOQUE_METODO
 	:	LLAVEIZQUIERDA INSTRUCCIONES LLAVEDERECHA
 	|	LLAVEIZQUIERDA  LLAVEDERECHA
 	;
 
+//Definicion del tipo de metodo o ya sea una funcion
 TIPOMETODO
 	: TIPO IDENTIFICADOR ASIGNACIONPARAMETROS
 	| RVOID IDENTIFICADOR ASIGNACIONPARAMETROS
 	| RVOID RMAIN PARENTESISIZQUIERDO PARENTESISDERECHO
 	;
 
+//Asignacion de parametros que puede o no tener un metodo o funcion
 ASIGNACIONPARAMETROS
 	: PARENTESISIZQUIERDO LISTAPARAMETROS PARENTESISDERECHO
 	| PARENTESISIZQUIERDO PARENTESISDERECHO
@@ -188,10 +203,12 @@ PARAMETROS
 	: TIPO IDENTIFICADOR
 	;
 
+//Instruccion print
 PRINT
 	:RPRINT PARENTESISIZQUIERDO EXPRESION PARENTESISDERECHO PUNTOYCOMA
 	;
 
+//Instruccion declaracion de variables
 DECLARACION 
 	: TIPO DECLARACIONP PUNTOYCOMA
 	;
@@ -206,16 +223,19 @@ DECLARACIONPP
 	| IDENTIFICADOR 
 	;
 
+//Instruccion asignacion de variables
 ASIGNACION 
 	: IDENTIFICADOR IGUAL EXPRESION PUNTOYCOMA
 	| INC_DEC PUNTOYCOMA
 ;
 
+// Incremetento o decremento de variables a++ o a--
 INC_DEC 
 	: IDENTIFICADOR INCREMENTO
 	| IDENTIFICADOR DECREMENTO
 ;
 
+//Tipos de variables admitidos en el lenguaje
 TIPO 
 	: RINT
   | RDOUBLE
@@ -224,6 +244,7 @@ TIPO
 	| RCHAR
 ;
 
+//Expresiones 
 EXPRESION 
 	: RESTA EXPRESION %prec UMENOS	
 	|	NOT EXPRESION	
@@ -252,6 +273,7 @@ EXPRESION
   | PARENTESISIZQUIERDO EXPRESION PARENTESISDERECHO		  
   ;	
 
+//Metodo para llamadas a funcioens identificador(ListaExpresiones);
 LLAMADAFUNCIONES
 	:IDENTIFICADOR PARENTESISIZQUIERDO LISTAEXPRESIONES PARENTESISDERECHO PUNTOYCOMA
 	|IDENTIFICADOR PARENTESISIZQUIERDO PARENTESISDERECHO PUNTOYCOMA
@@ -262,16 +284,19 @@ LISTAEXPRESIONES
 	|EXPRESION
 	;
 
+//Sentrencia if-else
 IF 
 	: RIF CONDICION BLOQUE_INSTRUCCIONES
   | RIF CONDICION BLOQUE_INSTRUCCIONES RELSE BLOQUE_INSTRUCCIONES
 	| RIF CONDICION BLOQUE_INSTRUCCIONES RELSE IF
 	;
 
+//Sentencia switch
 SWITCH
 	:RSWITCH PARENTESISIZQUIERDO EXPRESION PARENTESISDERECHO LLAVEIZQUIERDA CASES LLAVEDERECHA
 	;
 
+//Casos del switch
 CASES
 	:CASES CASE_EVALUAR
 	|CASE_EVALUAR
@@ -284,23 +309,28 @@ CASE_EVALUAR
 	|RDEFAULT DOSPUNTOS 
 	;
 
+//Condiciones 
 CONDICION 
 	: PARENTESISIZQUIERDO EXPRESION PARENTESISDERECHO	
 	;
 
+//Bloque de instrucciones para un algunas istrucciones
 BLOQUE_INSTRUCCIONES 
 	: LLAVEIZQUIERDA INSTRUCCIONES LLAVEDERECHA 
 	| LLAVEIZQUIERDA  LLAVEDERECHA 
   ;
 
+//Sentencia while
 WHILE
 	: RWHILE CONDICION BLOQUE_INSTRUCCIONES
 	;
 
+//Sentencia Do-while
 DO_WHILE
 	: RDO BLOQUE_INSTRUCCIONES RWHILE CONDICION PUNTOYCOMA
 	;
 
+//Sentencia for
 FOR
 	: RFOR PARENTESISIZQUIERDO DECLARACION  EXPRESION PUNTOYCOMA FORINC_DEC PARENTESISDERECHO BLOQUE_INSTRUCCIONES
 	| RFOR PARENTESISIZQUIERDO DECLARACIONP PUNTOYCOMA EXPRESION PUNTOYCOMA FORINC_DEC PARENTESISDERECHO BLOQUE_INSTRUCCIONES
@@ -311,15 +341,18 @@ FORINC_DEC
 	| INC_DEC					
 	;
 
+//Sentencia return
 RETURN
   : RRETURN EXPRESION PUNTOYCOMA
   | RRETURN PUNTOYCOMA
   ;
 
+//Sentencia break
 BREAK
   : RBREAK PUNTOYCOMA
   ;
 
+//Sentencia continue
 CONTINUE
   : RCONTINUE PUNTOYCOMA
   ;
