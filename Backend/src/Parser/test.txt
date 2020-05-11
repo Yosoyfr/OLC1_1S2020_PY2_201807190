@@ -5,6 +5,7 @@ import Lista_Simple;
 import Tabla_Hash;
 import Login;  
 class OperacionDATA {
+    
     int a = 5;
     String segundoParam = "Usted no \" anda fresco";
     char caracter = '#';
@@ -12,14 +13,37 @@ class OperacionDATA {
     double valor_doble = 15.56;
     int _hola, Primero, Ultimo;
     int numero,no1 = 8, no2 = 4, no3;
+    
     void main(){
+        int a = 0;
+		switch (a) {
+			case 1:
+				if (true) {
+					System.out.println("Hola");
+				} else {
+					System.out.println("No hola");
+				}
+				break;
+			case 2:
+				while (a != 0) {
+					continue;
+				}
+				break;
+			case 3:
+                int h = 14;
+                System.out.println("Hola nada");
+				System.out.println("Hola bebe");
+				break;
+			case 4:
+				int h = 30;
+				break;
+			default:
+				break;
+		}
         System.out.println("HOLA RES");
-		NoDevuelvoNada(b, c)
+		NoDevuelvoNada(b, c);
         a = b;
         String frescura = funcion_string();
-        continue
-        break
-        int
         int frescura2 = - 5 * - funcion_int(no1, frescura) + 9;
     }
     void NoDevuelvoNada(){
@@ -36,6 +60,11 @@ class OperacionDATA {
         }
     }
     String funcion_string(){
+        do{
+            while (booleano) {                        
+                continue;
+            }
+        }while(a >= 5);
         return "";
     }
     int funcion_int(int numeor1, String frescura){
@@ -43,6 +72,9 @@ class OperacionDATA {
             return 5;
         }
         else if(no1 > 5){
+            return 8;
+        }
+        else if(no2 > 5){
             return 8;
         }
         else{
@@ -86,8 +118,4 @@ class OperacionDATA {
 			System.out.println("USUARIO NO ENCOTRADO EN LA LISTA SIMPLE");
 		}
     }
-}
-
-class OperacionDATA {
-
 }

@@ -1,0 +1,878 @@
+{
+  "imports": [
+    {
+      "tipo": "INSTRUCCION_IMPORT",
+      "identificador": "Bloque"
+    },
+    {
+      "tipo": "INSTRUCCION_IMPORT",
+      "identificador": "Usuario"
+    },
+    {
+      "tipo": "INSTRUCCION_IMPORT",
+      "identificador": "Arbol_AVL"
+    },
+    {
+      "tipo": "INSTRUCCION_IMPORT",
+      "identificador": "Lista_Simple"
+    },
+    {
+      "tipo": "INSTRUCCION_IMPORT",
+      "identificador": "Tabla_Hash"
+    },
+    {
+      "tipo": "INSTRUCCION_IMPORT",
+      "identificador": "Login"
+    }
+  ],
+  "clases": [
+    {
+      "tipo": "INSTRUCCION_CLASS",
+      "identificador": "OperacionDATA",
+      "instrucciones": [
+        [
+          {
+            "tipo": "INSTRUCCION_DECLARACION",
+            "declaraciones": [
+              {
+                "tipo_dato": "int",
+                "identificador": "a",
+                "expresion": {
+                  "tipo": "VALOR_NUMERO",
+                  "valor": 5
+                }
+              }
+            ]
+          },
+          {
+            "tipo": "INSTRUCCION_DECLARACION",
+            "declaraciones": [
+              {
+                "tipo_dato": "String",
+                "identificador": "segundoParam",
+                "expresion": {
+                  "tipo": "VALOR_CADENA",
+                  "valor": "Usted no \\\" anda fresco"
+                }
+              }
+            ]
+          },
+          {
+            "tipo": "INSTRUCCION_DECLARACION",
+            "declaraciones": [
+              {
+                "tipo_dato": "char",
+                "identificador": "caracter",
+                "expresion": {
+                  "tipo": "VALOR_CARACTER",
+                  "valor": "#"
+                }
+              }
+            ]
+          },
+          {
+            "tipo": "INSTRUCCION_DECLARACION",
+            "declaraciones": [
+              {
+                "tipo_dato": "boolean",
+                "identificador": "booleano",
+                "expresion": {
+                  "tipo": "VALOR_LOGICO",
+                  "valor": "false"
+                }
+              }
+            ]
+          },
+          {
+            "tipo": "INSTRUCCION_DECLARACION",
+            "declaraciones": [
+              {
+                "tipo_dato": "double",
+                "identificador": "valor_doble",
+                "expresion": {
+                  "tipo": "VALOR_NUMERO",
+                  "valor": 15.56
+                }
+              }
+            ]
+          },
+          {
+            "tipo": "INSTRUCCION_DECLARACION",
+            "declaraciones": [
+              {
+                "tipo_dato": "int",
+                "identificador": "_hola"
+              },
+              {
+                "tipo_dato": "int",
+                "identificador": "Primero"
+              },
+              {
+                "tipo_dato": "int",
+                "identificador": "Ultimo"
+              }
+            ]
+          },
+          {
+            "tipo": "INSTRUCCION_DECLARACION",
+            "declaraciones": [
+              {
+                "tipo_dato": "int",
+                "identificador": "numero"
+              },
+              {
+                "tipo_dato": "int",
+                "identificador": "no1",
+                "expresion": {
+                  "tipo": "VALOR_NUMERO",
+                  "valor": 8
+                }
+              },
+              {
+                "tipo_dato": "int",
+                "identificador": "no2",
+                "expresion": {
+                  "tipo": "VALOR_NUMERO",
+                  "valor": 4
+                }
+              },
+              {
+                "tipo_dato": "int",
+                "identificador": "no3"
+              }
+            ]
+          },
+          {
+            "tipo": "METODO",
+            "identificador": "main",
+            "instrucciones": [
+              {
+                "tipo": "INSTRUCCION_DECLARACION",
+                "declaraciones": [
+                  {
+                    "tipo_dato": "int",
+                    "identificador": "a",
+                    "expresion": {
+                      "tipo": "VALOR_NUMERO",
+                      "valor": 0
+                    }
+                  }
+                ]
+              },
+              {
+                "tipo": "INSTRUCCION_SWITCH",
+                "expresion": {
+                  "tipo": "VALOR_IDENTIFICADOR",
+                  "valor": "a"
+                },
+                "casos": [
+                  {
+                    "tipo": "CASE",
+                    "expresion": {
+                      "tipo": "VALOR_NUMERO",
+                      "valor": 1
+                    },
+                    "instrucciones": [
+                      {
+                        "tipo": "INSTRUCCION_IF",
+                        "expresion": {
+                          "tipo": "VALOR_LOGICO",
+                          "valor": "true"
+                        },
+                        "instrucciones": [
+                          {
+                            "tipo": "INSTRUCCION_PRINT",
+                            "expresion": {
+                              "tipo": "VALOR_CADENA",
+                              "valor": "Hola"
+                            }
+                          }
+                        ],
+                        "alternativas": [
+                          {
+                            "tipo": "INSTRUCCION_ELSE",
+                            "instrucciones": [
+                              {
+                                "tipo": "INSTRUCCION_PRINT",
+                                "expresion": {
+                                  "tipo": "VALOR_CADENA",
+                                  "valor": "No hola"
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "tipo": "INSTRUCCION_BREAK"
+                      }
+                    ]
+                  },
+                  {
+                    "tipo": "CASE",
+                    "expresion": {
+                      "tipo": "VALOR_NUMERO",
+                      "valor": 2
+                    },
+                    "instrucciones": [
+                      {
+                        "tipo": "INSTRUCCION_WHILE",
+                        "expresion": {
+                          "operandoIzq": {
+                            "tipo": "VALOR_IDENTIFICADOR",
+                            "valor": "a"
+                          },
+                          "operandoDer": {
+                            "tipo": "VALOR_NUMERO",
+                            "valor": 0
+                          },
+                          "operacion": "OP_DISTINTO"
+                        },
+                        "instrucciones": [
+                          {
+                            "tipo": "INSTRUCCION_CONTINUE"
+                          }
+                        ]
+                      },
+                      {
+                        "tipo": "INSTRUCCION_BREAK"
+                      }
+                    ]
+                  },
+                  {
+                    "tipo": "CASE",
+                    "expresion": {
+                      "tipo": "VALOR_NUMERO",
+                      "valor": 3
+                    },
+                    "instrucciones": [
+                      {
+                        "tipo": "INSTRUCCION_DECLARACION",
+                        "declaraciones": [
+                          {
+                            "tipo_dato": "int",
+                            "identificador": "h",
+                            "expresion": {
+                              "tipo": "VALOR_NUMERO",
+                              "valor": 14
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "tipo": "INSTRUCCION_PRINT",
+                        "expresion": {
+                          "tipo": "VALOR_CADENA",
+                          "valor": "Hola nada"
+                        }
+                      },
+                      {
+                        "tipo": "INSTRUCCION_PRINT",
+                        "expresion": {
+                          "tipo": "VALOR_CADENA",
+                          "valor": "Hola bebe"
+                        }
+                      },
+                      {
+                        "tipo": "INSTRUCCION_BREAK"
+                      }
+                    ]
+                  },
+                  {
+                    "tipo": "CASE",
+                    "expresion": {
+                      "tipo": "VALOR_NUMERO",
+                      "valor": 4
+                    },
+                    "instrucciones": [
+                      {
+                        "tipo": "INSTRUCCION_DECLARACION",
+                        "declaraciones": [
+                          {
+                            "tipo_dato": "int",
+                            "identificador": "h",
+                            "expresion": {
+                              "tipo": "VALOR_NUMERO",
+                              "valor": 30
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "tipo": "INSTRUCCION_BREAK"
+                      }
+                    ]
+                  },
+                  {
+                    "tipo": "DEFAULT",
+                    "instrucciones": [
+                      {
+                        "tipo": "INSTRUCCION_BREAK"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "tipo": "INSTRUCCION_PRINT",
+                "expresion": {
+                  "tipo": "VALOR_CADENA",
+                  "valor": "HOLA RES"
+                }
+              },
+              {
+                "tipo": "LLAMADA_A_FUNCION",
+                "identificador": "NoDevuelvoNada",
+                "parametros": [
+                  {
+                    "tipo": "VALOR_IDENTIFICADOR",
+                    "valor": "b"
+                  },
+                  {
+                    "tipo": "VALOR_IDENTIFICADOR",
+                    "valor": "c"
+                  }
+                ]
+              },
+              {
+                "tipo": "INSTRUCCION_ASIGANCION",
+                "identificador": "a",
+                "expresion": {
+                  "tipo": "VALOR_IDENTIFICADOR",
+                  "valor": "b"
+                }
+              },
+              {
+                "tipo": "INSTRUCCION_DECLARACION",
+                "declaraciones": [
+                  {
+                    "tipo_dato": "String",
+                    "identificador": "frescura",
+                    "expresion": {
+                      "tipo": "VALOR_FUNCION",
+                      "valor": {
+                        "tipo": "LLAMADA_A_FUNCION",
+                        "identificador": "funcion_string",
+                        "parametros": []
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "tipo": "INSTRUCCION_DECLARACION",
+                "declaraciones": [
+                  {
+                    "tipo_dato": "int",
+                    "identificador": "frescura2",
+                    "expresion": {
+                      "operandoIzq": {
+                        "operandoIzq": {
+                          "operandoIzq": {
+                            "tipo": "VALOR_NUMERO",
+                            "valor": 5
+                          },
+                          "operacion": "OP_NEGATIVO"
+                        },
+                        "operandoDer": {
+                          "operandoIzq": {
+                            "tipo": "VALOR_FUNCION",
+                            "valor": {
+                              "tipo": "LLAMADA_A_FUNCION",
+                              "identificador": "funcion_int",
+                              "parametros": [
+                                {
+                                  "tipo": "VALOR_IDENTIFICADOR",
+                                  "valor": "no1"
+                                },
+                                {
+                                  "tipo": "VALOR_IDENTIFICADOR",
+                                  "valor": "frescura"
+                                }
+                              ]
+                            }
+                          },
+                          "operacion": "OP_NEGATIVO"
+                        },
+                        "operacion": "OP_MULTIPLICACION"
+                      },
+                      "operandoDer": {
+                        "tipo": "VALOR_NUMERO",
+                        "valor": 9
+                      },
+                      "operacion": "OP_SUMA"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "tipo": "METODO",
+            "identificador": "NoDevuelvoNada",
+            "instrucciones": [
+              {
+                "tipo": "INSTRUCCION_PRINT",
+                "expresion": {
+                  "tipo": "VALOR_CADENA",
+                  "valor": "NO DEVUELVO NADA"
+                }
+              },
+              {
+                "tipo": "INSTRUCCION_FOR",
+                "variables": {
+                  "tipo": "INSTRUCCION_DECLARACION",
+                  "declaraciones": [
+                    {
+                      "tipo_dato": "int",
+                      "identificador": "i",
+                      "expresion": {
+                        "tipo": "VALOR_NUMERO",
+                        "valor": 0
+                      }
+                    },
+                    {
+                      "tipo_dato": "int",
+                      "identificador": "a",
+                      "expresion": {
+                        "tipo": "VALOR_NUMERO",
+                        "valor": 3
+                      }
+                    }
+                  ]
+                },
+                "expresion": {
+                  "operandoIzq": {
+                    "tipo": "VALOR_IDENTIFICADOR",
+                    "valor": "i"
+                  },
+                  "operandoDer": {
+                    "tipo": "VALOR_NUMERO",
+                    "valor": 10
+                  },
+                  "operacion": "OP_MENOR_QUE"
+                },
+                "modificacionesVar": [
+                  {
+                    "tipo": "INSTRUCCION_ASIGANCION",
+                    "identificador": "i",
+                    "expresion": "++"
+                  }
+                ],
+                "instrucciones": ")"
+              }
+            ]
+          },
+          {
+            "tipo": "FUNCION",
+            "tipo_funcion": "String",
+            "identificador": "funcion_string",
+            "instrucciones": [
+              {
+                "tipo": "INSTRUCCION_DO_WHILE",
+                "expresion": {
+                  "operandoIzq": {
+                    "tipo": "VALOR_IDENTIFICADOR",
+                    "valor": "a"
+                  },
+                  "operandoDer": {
+                    "tipo": "VALOR_NUMERO",
+                    "valor": 5
+                  },
+                  "operacion": "OP_MAYOR_IGUAL_QUE"
+                },
+                "instrucciones": [
+                  {
+                    "tipo": "INSTRUCCION_WHILE",
+                    "expresion": {
+                      "tipo": "VALOR_IDENTIFICADOR",
+                      "valor": "booleano"
+                    },
+                    "instrucciones": [
+                      {
+                        "tipo": "INSTRUCCION_CONTINUE"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "tipo": "INSTRUCCION_RETURN",
+                "valor": {
+                  "tipo": "VALOR_CADENA",
+                  "valor": ""
+                }
+              }
+            ]
+          },
+          {
+            "tipo": "FUNCION",
+            "tipo_funcion": "int",
+            "identificador": "funcion_int",
+            "parametros": [
+              {
+                "tipo": "PARAMETRO",
+                "tipo_dato": "int",
+                "identificador": "numeor1"
+              },
+              {
+                "tipo": "PARAMETRO",
+                "tipo_dato": "String",
+                "identificador": "frescura"
+              }
+            ],
+            "instrucciones": [
+              {
+                "tipo": "INSTRUCCION_IF",
+                "expresion": {
+                  "tipo": "VALOR_IDENTIFICADOR",
+                  "valor": "booleano"
+                },
+                "instrucciones": [
+                  {
+                    "tipo": "INSTRUCCION_RETURN",
+                    "valor": {
+                      "tipo": "VALOR_NUMERO",
+                      "valor": 5
+                    }
+                  }
+                ],
+                "alternativas": [
+                  {
+                    "tipo": "INSTRUCCION_IF",
+                    "expresion": {
+                      "operandoIzq": {
+                        "tipo": "VALOR_IDENTIFICADOR",
+                        "valor": "no1"
+                      },
+                      "operandoDer": {
+                        "tipo": "VALOR_NUMERO",
+                        "valor": 5
+                      },
+                      "operacion": "OP_MAYOR_QUE"
+                    },
+                    "instrucciones": [
+                      {
+                        "tipo": "INSTRUCCION_RETURN",
+                        "valor": {
+                          "tipo": "VALOR_NUMERO",
+                          "valor": 8
+                        }
+                      }
+                    ],
+                    "alternativas": [
+                      {
+                        "tipo": "INSTRUCCION_IF",
+                        "expresion": {
+                          "operandoIzq": {
+                            "tipo": "VALOR_IDENTIFICADOR",
+                            "valor": "no2"
+                          },
+                          "operandoDer": {
+                            "tipo": "VALOR_NUMERO",
+                            "valor": 5
+                          },
+                          "operacion": "OP_MAYOR_QUE"
+                        },
+                        "instrucciones": [
+                          {
+                            "tipo": "INSTRUCCION_RETURN",
+                            "valor": {
+                              "tipo": "VALOR_NUMERO",
+                              "valor": 8
+                            }
+                          }
+                        ],
+                        "alternativas": [
+                          {
+                            "tipo": "INSTRUCCION_ELSE",
+                            "instrucciones": [
+                              {
+                                "tipo": "INSTRUCCION_RETURN",
+                                "valor": {
+                                  "tipo": "VALOR_NUMERO",
+                                  "valor": 3
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "tipo": "METODO",
+            "identificador": "eliminarUsuario",
+            "parametros": [
+              {
+                "tipo": "PARAMETRO",
+                "tipo_dato": "String",
+                "identificador": "busqueda"
+              }
+            ],
+            "instrucciones": [
+              {
+                "tipo": "INSTRUCCION_DECLARACION",
+                "declaraciones": [
+                  {
+                    "tipo_dato": "int",
+                    "identificador": "actual",
+                    "expresion": {
+                      "tipo": "VALOR_IDENTIFICADOR",
+                      "valor": "Primero"
+                    }
+                  }
+                ]
+              },
+              {
+                "tipo": "INSTRUCCION_DECLARACION",
+                "declaraciones": [
+                  {
+                    "tipo_dato": "int",
+                    "identificador": "anterior",
+                    "expresion": {
+                      "tipo": "VALOR_IDENTIFICADOR",
+                      "valor": "null"
+                    }
+                  }
+                ]
+              },
+              {
+                "tipo": "INSTRUCCION_DECLARACION",
+                "declaraciones": [
+                  {
+                    "tipo_dato": "boolean",
+                    "identificador": "bandera",
+                    "expresion": {
+                      "tipo": "VALOR_LOGICO",
+                      "valor": "false"
+                    }
+                  }
+                ]
+              },
+              {
+                "tipo": "INSTRUCCION_IF",
+                "expresion": {
+                  "operandoIzq": {
+                    "tipo": "VALOR_IDENTIFICADOR",
+                    "valor": "Primero"
+                  },
+                  "operandoDer": {
+                    "tipo": "VALOR_IDENTIFICADOR",
+                    "valor": "null"
+                  },
+                  "operacion": "OP_DISTINTO"
+                },
+                "instrucciones": [
+                  {
+                    "tipo": "INSTRUCCION_WHILE",
+                    "expresion": {
+                      "operandoIzq": {
+                        "operandoIzq": {
+                          "tipo": "VALOR_IDENTIFICADOR",
+                          "valor": "actual"
+                        },
+                        "operandoDer": {
+                          "tipo": "VALOR_IDENTIFICADOR",
+                          "valor": "null"
+                        },
+                        "operacion": "OP_DISTINTO"
+                      },
+                      "operandoDer": {
+                        "operandoIzq": {
+                          "tipo": "VALOR_IDENTIFICADOR",
+                          "valor": "bandera"
+                        },
+                        "operacion": "OP_NOT"
+                      },
+                      "operacion": "OP_AND"
+                    },
+                    "instrucciones": [
+                      {
+                        "tipo": "INSTRUCCION_DECLARACION",
+                        "declaraciones": [
+                          {
+                            "tipo_dato": "String",
+                            "identificador": "carnet",
+                            "expresion": {
+                              "operandoIzq": {
+                                "tipo": "VALOR_FUNCION",
+                                "valor": {
+                                  "tipo": "LLAMADA_A_FUNCION",
+                                  "identificador": "getCarnet",
+                                  "parametros": []
+                                }
+                              },
+                              "operandoDer": {
+                                "tipo": "VALOR_CADENA",
+                                "valor": ""
+                              },
+                              "operacion": "OP_SUMA"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "tipo": "INSTRUCCION_IF",
+                        "expresion": {
+                          "tipo": "VALOR_FUNCION",
+                          "valor": {
+                            "tipo": "LLAMADA_A_FUNCION",
+                            "identificador": "equals",
+                            "parametros": [
+                              {
+                                "tipo": "VALOR_IDENTIFICADOR",
+                                "valor": "carnet"
+                              }
+                            ]
+                          }
+                        },
+                        "instrucciones": [
+                          {
+                            "tipo": "INSTRUCCION_ASIGANCION",
+                            "identificador": "bandera",
+                            "expresion": {
+                              "tipo": "VALOR_LOGICO",
+                              "valor": "true"
+                            }
+                          },
+                          {
+                            "tipo": "INSTRUCCION_BREAK"
+                          }
+                        ],
+                        "alternativas": []
+                      },
+                      {
+                        "tipo": "INSTRUCCION_ASIGANCION",
+                        "identificador": "anterior",
+                        "expresion": {
+                          "tipo": "VALOR_IDENTIFICADOR",
+                          "valor": "actual"
+                        }
+                      },
+                      {
+                        "tipo": "INSTRUCCION_ASIGANCION",
+                        "identificador": "actual",
+                        "expresion": {
+                          "tipo": "VALOR_FUNCION",
+                          "valor": {
+                            "tipo": "LLAMADA_A_FUNCION",
+                            "identificador": "getSiguiente",
+                            "parametros": []
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "alternativas": []
+              },
+              {
+                "tipo": "INSTRUCCION_IF",
+                "expresion": {
+                  "tipo": "VALOR_IDENTIFICADOR",
+                  "valor": "bandera"
+                },
+                "instrucciones": [
+                  {
+                    "tipo": "INSTRUCCION_IF",
+                    "expresion": {
+                      "operandoIzq": {
+                        "tipo": "VALOR_IDENTIFICADOR",
+                        "valor": "actual"
+                      },
+                      "operandoDer": {
+                        "tipo": "VALOR_IDENTIFICADOR",
+                        "valor": "Primero"
+                      },
+                      "operacion": "OP_IGUALDAD"
+                    },
+                    "instrucciones": [
+                      {
+                        "tipo": "INSTRUCCION_ASIGANCION",
+                        "identificador": "Primero",
+                        "expresion": {
+                          "tipo": "VALOR_FUNCION",
+                          "valor": {
+                            "tipo": "LLAMADA_A_FUNCION",
+                            "identificador": "getSiguiente",
+                            "parametros": []
+                          }
+                        }
+                      }
+                    ],
+                    "alternativas": [
+                      {
+                        "tipo": "INSTRUCCION_IF",
+                        "expresion": {
+                          "operandoIzq": {
+                            "tipo": "VALOR_IDENTIFICADOR",
+                            "valor": "actual"
+                          },
+                          "operandoDer": {
+                            "tipo": "VALOR_IDENTIFICADOR",
+                            "valor": "Ultimo"
+                          },
+                          "operacion": "OP_IGUALDAD"
+                        },
+                        "instrucciones": [
+                          {
+                            "tipo": "INSTRUCCION_ASIGANCION",
+                            "identificador": "Ultimo",
+                            "expresion": {
+                              "tipo": "VALOR_IDENTIFICADOR",
+                              "valor": "anterior"
+                            }
+                          }
+                        ],
+                        "alternativas": [
+                          {
+                            "tipo": "INSTRUCCION_ELSE",
+                            "instrucciones": [
+                              {
+                                "tipo": "LLAMADA_A_FUNCION",
+                                "identificador": "setSiguiente",
+                                "parametros": [
+                                  {
+                                    "tipo": "VALOR_FUNCION",
+                                    "valor": {
+                                      "tipo": "LLAMADA_A_FUNCION",
+                                      "identificador": "getSiguiente",
+                                      "parametros": []
+                                    }
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "alternativas": [
+                  {
+                    "tipo": "INSTRUCCION_ELSE",
+                    "instrucciones": [
+                      {
+                        "tipo": "INSTRUCCION_PRINT",
+                        "expresion": {
+                          "tipo": "VALOR_CADENA",
+                          "valor": "USUARIO NO ENCOTRADO EN LA LISTA SIMPLE"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      ]
+    }
+  ]
+}
