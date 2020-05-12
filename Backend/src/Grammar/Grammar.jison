@@ -87,8 +87,6 @@
 /lex
 
 %{
-	const TIPO_OPERACION = require("../Instrucciones/intrucciones").TIPO_OPEARACION;
-	const TIPO_VALOR 		= require("../Instrucciones/intrucciones").TIPO_VALOR;
 	const instruccionesAPI	= require("../Instrucciones/intrucciones").instruccionesAPI;
 %}
 /* Asociación de operadores y precedencia */
@@ -111,6 +109,7 @@
 // cuado se haya reconocido la entrada completa retornamos el AST
 INICIO
 	: EOF
+	| IMPORTS EOF {return instruccionesAPI.raiz($1, undefined);}
 	| IMPORTS CLASS EOF {return instruccionesAPI.raiz($1, $2);}
 	| CLASS EOF {return instruccionesAPI.raiz(undefined, $1);}
 	| error { console.error('Este es un error sintáctico: ' + yytext + ', en la linea: ' + this._$.first_line + ', en la columna: ' + this._$.first_column); }
@@ -118,8 +117,8 @@ INICIO
 
 //Imports de clases
 IMPORTS 
-	: IMPORTS RIMPORT IMPORT { $1.push($3); $$ = $1; }
-	| RIMPORT IMPORT { $$ = [$2]; }
+	: IMPORTS RIMPORT IMPORT { $$ = instruccionesAPI.inicio_imports($1, $3); }
+	| RIMPORT IMPORT { $$ = instruccionesAPI.inicio_imports(undefined, $2); }
 	;
 
 IMPORT
@@ -129,8 +128,8 @@ IMPORT
 
 //Metodo para el analisis de clases
 CLASS
-	: CLASS CLASSP { $1.push($2); $$ = $1; }
-	| CLASSP { $$ = [$1]; }
+	: CLASS CLASSP { $$ = instruccionesAPI.inicio_clases($1, $2); }
+	| CLASSP { $$ = instruccionesAPI.inicio_clases(undefined, $1); }
 	;
 
 CLASSP
@@ -139,13 +138,13 @@ CLASSP
 
 //Bloque de una clase identificada { Instrucciones }
 BLOQUE_CLASE
-	: LLAVEIZQUIERDA BLOQUE_CLASEP LLAVEDERECHA { $$ = [$2]; }
+	: LLAVEIZQUIERDA BLOQUE_CLASEP LLAVEDERECHA { $$ = $2; }
 	| LLAVEIZQUIERDA LLAVEDERECHA { $$ = undefined; }
 	;
 
 BLOQUE_CLASEP
-	: BLOQUE_CLASEP BLOQUE_CLASEPP { $1.push($2); $$ = $1; }
-	| BLOQUE_CLASEPP { $$ = [$1]; }
+	: BLOQUE_CLASEP BLOQUE_CLASEPP { $$ = instruccionesAPI.bloque_class($1, $2); }
+	| BLOQUE_CLASEPP { $$ = instruccionesAPI.bloque_class(undefined, $1); }
 	;
 
 BLOQUE_CLASEPP
@@ -163,7 +162,7 @@ METODOS
 //Bloque de instrucciones en un metodo
 BLOQUE_METODO
 	:	LLAVEIZQUIERDA INSTRUCCIONES LLAVEDERECHA { $$ = $2; }
-	|	LLAVEIZQUIERDA  LLAVEDERECHA { $$ = undefined; }
+	|	LLAVEIZQUIERDA LLAVEDERECHA { $$ = undefined; }
 	;
 
 //Asignacion de parametros que puede o no tener un metodo o funcion
@@ -173,8 +172,8 @@ ASIGNACIONPARAMETROS
 	;
 
 LISTAPARAMETROS
-	: LISTAPARAMETROS COMA PARAMETROS { $1.push($3); $$ = $1; }
-	| PARAMETROS { $$ = [$1]; }
+	: LISTAPARAMETROS COMA PARAMETROS { $$ = instruccionesAPI.lista_parametros($1, $2, $3); }
+	| PARAMETROS { $$ = instruccionesAPI.lista_parametros(undefined, undefined, $1); }
 	;
 
 PARAMETROS
@@ -183,13 +182,13 @@ PARAMETROS
 
 // Metodo de instrucciones
 INSTRUCCIONES
-	: INSTRUCCIONES INSTRUCCION { $1.push($2); $$ = $1; }
-	| INSTRUCCION	{ $$ = [$1]; }
+	: INSTRUCCIONES INSTRUCCION { $$ = instruccionesAPI.bloque_instrucciones($1, $2); }
+	| INSTRUCCION	{ $$ = instruccionesAPI.bloque_instrucciones(undefined, $1); }
 ;
 
 //Posibles instrucciones como if-else, switch, while, do-while, for, llamadas a funciones, print, etc.
 INSTRUCCION
-	: IF { $$ = $1; }
+	: IF { $$ = instruccionesAPI.inicio_if($1); }
 	| SWITCH { $$ = $1; }
 	| WHILE { $$ = $1; }
 	| DO_WHILE { $$ = $1; }
@@ -211,29 +210,24 @@ PRINT
 
 //Instruccion declaracion de variables
 DECLARACION 
-	: TIPO DECLARACIONP PUNTOYCOMA { $$ = instruccionesAPI.inst_declaracion($1, $2); }
+	: TIPO DECLARACIONP PUNTOYCOMA { $$ = instruccionesAPI.bloque_declaraciones($1, $2); }
 	;
 
 DECLARACIONP 
-	: DECLARACIONP COMA DECLARACIONPP { $1.push($3); $$ = $1; }
-	| DECLARACIONPP { $$ = [$1]; }
+	: DECLARACIONP COMA DECLARACIONPP { $$ = instruccionesAPI.bloque_declaracionesP($1, $2, $3); }
+	| DECLARACIONPP { $$ = instruccionesAPI.bloque_declaracionesP(undefined, undefined, $1); }
 	;
 
 DECLARACIONPP
-	: IDENTIFICADOR IGUAL EXPRESION { $$ = instruccionesAPI.asignacion_declaracion($1, $3); }
-	| IDENTIFICADOR { $$ = instruccionesAPI.asignacion_declaracion($1, undefined); }
+	: IDENTIFICADOR IGUAL EXPRESION { $$ = instruccionesAPI.inst_declaracion($1, $2,  $3); }
+	| IDENTIFICADOR { $$ = instruccionesAPI.inst_declaracion($1, undefined, undefined); }
 	;
 
 //Instruccion asignacion de variables
 ASIGNACION 
-	: IDENTIFICADOR IGUAL EXPRESION PUNTOYCOMA { $$ = instruccionesAPI.inst_asignacion($1, $3); }
-	| INC_DEC PUNTOYCOMA { $$ = $1; }
-;
-
-// Incremetento o decremento de variables a++ o a--
-INC_DEC 
-	: IDENTIFICADOR INCREMENTO { $$ = instruccionesAPI.inst_asignacion($1, $2); }
-	| IDENTIFICADOR DECREMENTO { $$ = instruccionesAPI.inst_asignacion($1, $2); }
+	: IDENTIFICADOR IGUAL EXPRESION PUNTOYCOMA { $$ = instruccionesAPI.inst_asignacion($1, $2, $3); }
+	| IDENTIFICADOR INCREMENTO PUNTOYCOMA { $$ = instruccionesAPI.inst_asignacion($1, $2, undefined); }
+	| IDENTIFICADOR DECREMENTO PUNTOYCOMA { $$ = instruccionesAPI.inst_asignacion($1, $2, undefined); }
 ;
 
 //Tipos de variables admitidos en el lenguaje
@@ -247,72 +241,72 @@ TIPO
 
 //Expresiones 
 EXPRESION 
-	: RESTA EXPRESION %prec UMENOS	{ $$ = instruccionesAPI.operacionUnaria($2, TIPO_OPERACION.NEGATIVO); }
-	|	NOT EXPRESION	{ $$ = instruccionesAPI.operacionUnaria($2, TIPO_OPERACION.NOT); }
-  | EXPRESION SUMA EXPRESION { $$ = instruccionesAPI.operacionBinaria($1, $3, TIPO_OPERACION.SUMA); }
-  | EXPRESION RESTA EXPRESION	{ $$ = instruccionesAPI.operacionBinaria($1, $3, TIPO_OPERACION.RESTA); }
-  | EXPRESION MULTIPLICACION EXPRESION { $$ = instruccionesAPI.operacionBinaria($1, $3, TIPO_OPERACION.MULTIPLICACION); }
-  | EXPRESION DIVISION EXPRESION { $$ = instruccionesAPI.operacionBinaria($1, $3, TIPO_OPERACION.DIVISION); }
-	| EXPRESION MODULO EXPRESION { $$ = instruccionesAPI.operacionBinaria($1, $3, TIPO_OPERACION.MODULO); }
-	| EXPRESION POTENCIA EXPRESION { $$ = instruccionesAPI.operacionBinaria($1, $3, TIPO_OPERACION.POTENCIA); }
-	| EXPRESION AND EXPRESION	{ $$ = instruccionesAPI.operacionBinaria($1, $3, TIPO_OPERACION.AND); }
-	| EXPRESION OR EXPRESION { $$ = instruccionesAPI.operacionBinaria($1, $3, TIPO_OPERACION.OR); }
-	| EXPRESION IGUALDAD EXPRESION { $$ = instruccionesAPI.operacionBinaria($1, $3, TIPO_OPERACION.IGUALDAD); }
-	| EXPRESION DISTINTO EXPRESION { $$ = instruccionesAPI.operacionBinaria($1, $3, TIPO_OPERACION.DISTINTO); }
-	| EXPRESION MENORIGUALQUE EXPRESION { $$ = instruccionesAPI.operacionBinaria($1, $3, TIPO_OPERACION.MENOR_IGUAL_QUE); }
-	| EXPRESION MENORQUE EXPRESION { $$ = instruccionesAPI.operacionBinaria($1, $3, TIPO_OPERACION.MENOR_QUE); }
-	| EXPRESION MAYORIGUALQUE EXPRESION { $$ = instruccionesAPI.operacionBinaria($1, $3, TIPO_OPERACION.MAYOR_IGUAL_QUE); }
-	| EXPRESION MAYORQUE EXPRESION { $$ = instruccionesAPI.operacionBinaria($1, $3, TIPO_OPERACION.MAYOR_QUE); }
+	: RESTA EXPRESION %prec UMENOS	{ $$ = instruccionesAPI.operacionUnaria($2, "-"); }
+	|	NOT EXPRESION	{ $$ = instruccionesAPI.operacionUnaria($2, "!"); }
+  | EXPRESION SUMA EXPRESION { $$ = instruccionesAPI.operacionBinaria($1, $3, "+"); }
+  | EXPRESION RESTA EXPRESION	{ $$ = instruccionesAPI.operacionBinaria($1, $3, "-"); }
+  | EXPRESION MULTIPLICACION EXPRESION { $$ = instruccionesAPI.operacionBinaria($1, $3, "*"); }
+  | EXPRESION DIVISION EXPRESION { $$ = instruccionesAPI.operacionBinaria($1, $3, "/"); }
+	| EXPRESION MODULO EXPRESION { $$ = instruccionesAPI.operacionBinaria($1, $3, "%"); }
+	| EXPRESION POTENCIA EXPRESION { $$ = instruccionesAPI.operacionBinaria($1, $3, "^"); }
+	| EXPRESION AND EXPRESION	{ $$ = instruccionesAPI.operacionBinaria($1, $3, "&&"); }
+	| EXPRESION OR EXPRESION { $$ = instruccionesAPI.operacionBinaria($1, $3, "||"); }
+	| EXPRESION IGUALDAD EXPRESION { $$ = instruccionesAPI.operacionBinaria($1, $3, "=="); }
+	| EXPRESION DISTINTO EXPRESION { $$ = instruccionesAPI.operacionBinaria($1, $3, "!="); }
+	| EXPRESION MENORIGUALQUE EXPRESION { $$ = instruccionesAPI.operacionBinaria($1, $3, "<="); }
+	| EXPRESION MENORQUE EXPRESION { $$ = instruccionesAPI.operacionBinaria($1, $3, "<"); }
+	| EXPRESION MAYORIGUALQUE EXPRESION { $$ = instruccionesAPI.operacionBinaria($1, $3, ">="); }
+	| EXPRESION MAYORQUE EXPRESION { $$ = instruccionesAPI.operacionBinaria($1, $3, ">"); }
 	| PARENTESISIZQUIERDO EXPRESION PARENTESISDERECHO { $$ = $2 }
-	| NUMERO { $$ = instruccionesAPI.valor(Number($1), TIPO_VALOR.NUMERO); }
-  | RTRUE { $$ = instruccionesAPI.valor($1, TIPO_VALOR.LOGICO); }
-  | RFALSE { $$ = instruccionesAPI.valor($1, TIPO_VALOR.LOGICO); }
-  | CADENA { $$ = instruccionesAPI.valor($1, TIPO_VALOR.CADENA); }
-	| CARACTER { $$ = instruccionesAPI.valor($1, TIPO_VALOR.CARACTER); }
-  | IDENTIFICADOR PARENTESISIZQUIERDO LISTAEXPRESIONES PARENTESISDERECHO { $$ = instruccionesAPI.valor(instruccionesAPI.llamada_funciones($1, $3), TIPO_VALOR.FUNCION); }
-	| IDENTIFICADOR PARENTESISIZQUIERDO PARENTESISDERECHO { $$ = instruccionesAPI.valor(instruccionesAPI.llamada_funciones($1, []), TIPO_VALOR.FUNCION); }
-	| IDENTIFICADOR { $$ = instruccionesAPI.valor($1, TIPO_VALOR.IDENTIFICADOR); }
+	| NUMERO { $$ = {NUMERO: Number($1)}; }
+  | RTRUE { $$ = {LOGICO: $1}; }
+  | RFALSE { $$ = {LOGICO: $1}; }
+  | CADENA { $$ = {CADENA: $1}; }
+	| CARACTER { $$ = {CARACTER: $1}; }
+  | IDENTIFICADOR PARENTESISIZQUIERDO LISTAEXPRESIONES PARENTESISDERECHO { $$ = instruccionesAPI.llamada_funciones($1, $3, undefined); }
+	| IDENTIFICADOR PARENTESISIZQUIERDO PARENTESISDERECHO { $$ = instruccionesAPI.llamada_funciones($1, undefined, undefined); }
+	| IDENTIFICADOR { $$ = {IDENTIFICADOR: $1}; }
   ;	
 
 //Metodo para llamadas a funcioens identificador(ListaExpresiones);
 LLAMADAFUNCIONES
-	:IDENTIFICADOR PARENTESISIZQUIERDO LISTAEXPRESIONES PARENTESISDERECHO PUNTOYCOMA { $$ = instruccionesAPI.llamada_funciones($1, $3); }
-	|IDENTIFICADOR PARENTESISIZQUIERDO PARENTESISDERECHO PUNTOYCOMA { $$ = instruccionesAPI.llamada_funciones($1, []); }
+	:IDENTIFICADOR PARENTESISIZQUIERDO LISTAEXPRESIONES PARENTESISDERECHO PUNTOYCOMA { $$ = instruccionesAPI.llamada_funciones($1, $3, $5); }
+	|IDENTIFICADOR PARENTESISIZQUIERDO PARENTESISDERECHO PUNTOYCOMA { $$ = instruccionesAPI.llamada_funciones($1, undefined, $4); }
 	;
 
 LISTAEXPRESIONES
-	:LISTAEXPRESIONES COMA EXPRESION { $1.push($3); $$ = $1; }
-	|EXPRESION { $$ = [$1]; }
+	:LISTAEXPRESIONES COMA EXPRESION { $$ = instruccionesAPI.lista_expresiones($1, $2, $3); }
+	|EXPRESION { $$ = instruccionesAPI.lista_expresiones(undefined, undefined, $1); }
 	;
 
 //Sentrencia if-else
 IF 
-	: RIF CONDICION BLOQUE_INSTRUCCIONES { $$ = instruccionesAPI.inst_if($2, $3, []); }
-  | RIF CONDICION BLOQUE_INSTRUCCIONES RELSE BLOQUE_INSTRUCCIONES { $$ = instruccionesAPI.inst_if($2, $3, [instruccionesAPI.inst_else($5)]); }
-	| RIF CONDICION BLOQUE_INSTRUCCIONES RELSE IF { $$ = instruccionesAPI.inst_if($2, $3, [$5]); }
+	: RIF CONDICION BLOQUE_INSTRUCCIONES { $$ = instruccionesAPI.inst_if($2, $3, undefined, undefined); }
+  | RIF CONDICION BLOQUE_INSTRUCCIONES RELSE BLOQUE_INSTRUCCIONES { $$ = instruccionesAPI.inst_if($2, $3, undefined, instruccionesAPI.inst_else($5)); }
+	| RIF CONDICION BLOQUE_INSTRUCCIONES RELSE IF { $$ = instruccionesAPI.inst_if($2, $3, instruccionesAPI.inst_else_if($5), undefined); }
 	;
 
 //Sentencia switch
 SWITCH
-	:RSWITCH PARENTESISIZQUIERDO EXPRESION PARENTESISDERECHO LLAVEIZQUIERDA CASES LLAVEDERECHA { $$ = instruccionesAPI.inst_switch($3, $6); }
+	:RSWITCH CONDICION LLAVEIZQUIERDA CASES LLAVEDERECHA { $$ = instruccionesAPI.inst_switch($2, $4); }
 	;
 
 //Casos del switch
 CASES
-	:CASES CASE_EVALUAR {$1.push($2); $$ = $1;}
-	|CASE_EVALUAR { $$ = [$1];}
+	:CASES CASE_EVALUAR { $$ = instruccionesAPI.listaCasos($1, $2); }
+	|CASE_EVALUAR { $$ = instruccionesAPI.listaCasos(undefined, $1); }
 	;
 
 CASE_EVALUAR
-	:RCASE EXPRESION DOSPUNTOS INSTRUCCIONES { $$ = instruccionesAPI.caso(0, $2, $4); }
-	|RCASE EXPRESION DOSPUNTOS { $$ = instruccionesAPI.caso(0, $2, undefined); }
-	|RDEFAULT DOSPUNTOS INSTRUCCIONES { $$ = instruccionesAPI.caso(1, undefined, $3); }
-	|RDEFAULT DOSPUNTOS { $$ = instruccionesAPI.caso(1, undefined, undefined); }
+	:RCASE EXPRESION DOSPUNTOS INSTRUCCIONES { $$ = instruccionesAPI.caso($1, $2, $4); }
+	|RCASE EXPRESION DOSPUNTOS { $$ = instruccionesAPI.caso($1, $2, undefined); }
+	|RDEFAULT DOSPUNTOS INSTRUCCIONES { $$ = instruccionesAPI.caso($1, undefined, $3); }
+	|RDEFAULT DOSPUNTOS { $$ = instruccionesAPI.caso($1, undefined, undefined); }
 	;
 
 //Condiciones 
 CONDICION 
-	: PARENTESISIZQUIERDO EXPRESION PARENTESISDERECHO	{ $$ = $2; }
+	: PARENTESISIZQUIERDO EXPRESION PARENTESISDERECHO	{ $$ = instruccionesAPI.condicion($2); }
 	;
 
 //Bloque de instrucciones para un algunas istrucciones
@@ -328,19 +322,25 @@ WHILE
 
 //Sentencia Do-while
 DO_WHILE
-	: RDO BLOQUE_INSTRUCCIONES RWHILE CONDICION PUNTOYCOMA { $$ = instruccionesAPI.inst_do_while($4, $2); }
+	: RDO BLOQUE_INSTRUCCIONES RWHILE CONDICION PUNTOYCOMA { $$ = instruccionesAPI.inst_do_while($2, $4); }
 	;
 
 //Sentencia for
 FOR
-	: RFOR PARENTESISIZQUIERDO DECLARACION EXPRESION PUNTOYCOMA FORINC_DEC PARENTESISDERECHO BLOQUE_INSTRUCCIONES { $$ = instruccionesAPI.inst_for($3, $4, $6, $7); }
-	| RFOR PARENTESISIZQUIERDO DECLARACIONP PUNTOYCOMA EXPRESION PUNTOYCOMA FORINC_DEC PARENTESISDERECHO BLOQUE_INSTRUCCIONES  { $$ = instruccionesAPI.inst_for($3, $5, $7, $9); }
+	: RFOR PARENTESISIZQUIERDO DECLARACION EXPRESION PUNTOYCOMA FORINC_DEC PARENTESISDERECHO BLOQUE_INSTRUCCIONES { $$ = instruccionesAPI.inst_for($3, undefined, $4, $6, $8); }
+	| RFOR PARENTESISIZQUIERDO DECLARACIONP PUNTOYCOMA EXPRESION PUNTOYCOMA FORINC_DEC PARENTESISDERECHO BLOQUE_INSTRUCCIONES  { $$ = instruccionesAPI.inst_for(undefined, {ASIGNACION:$3, PUNTO_Y_COMA: ";"}, $5, $7, $9); }
 	;
 
 FORINC_DEC
-	: FORINC_DEC COMA INC_DEC {$1.push($3); $$ = $1;}
-	| INC_DEC { $$ = [$1];}
+	: FORINC_DEC COMA INC_DEC { $$ = instruccionesAPI.modificador_For($1, $2, $3); }
+	| INC_DEC { $$ = instruccionesAPI.modificador_For(undefined, undefined, $1); }
 	;
+
+// Incremetento o decremento de variables a++ o a--
+INC_DEC 
+	: IDENTIFICADOR INCREMENTO { $$ = instruccionesAPI.inst_modificacion($1, $2); }
+	| IDENTIFICADOR DECREMENTO { $$ = instruccionesAPI.inst_modificacion($1, $2); }
+;
 
 //Sentencia return
 RETURN

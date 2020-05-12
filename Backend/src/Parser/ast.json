@@ -1,878 +1,1362 @@
 {
-  "imports": [
-    {
-      "tipo": "INSTRUCCION_IMPORT",
-      "identificador": "Bloque"
+  "IMPORTS": {
+    "IMPORTS": {
+      "IMPORTS": {
+        "IMPORTS": {
+          "IMPORTS": {
+            "IMPORTS": {
+              "IMPORT": {
+                "RESERVADA": "import",
+                "IDENTIFICADOR": "Bloque",
+                "PUNTO_Y_COMA": ";"
+              }
+            },
+            "IMPORT": {
+              "RESERVADA": "import",
+              "IDENTIFICADOR": "Usuario",
+              "PUNTO_Y_COMA": ";"
+            }
+          },
+          "IMPORT": {
+            "RESERVADA": "import",
+            "IDENTIFICADOR": "Arbol_AVL",
+            "PUNTO_Y_COMA": ";"
+          }
+        },
+        "IMPORT": {
+          "RESERVADA": "import",
+          "IDENTIFICADOR": "Lista_Simple",
+          "PUNTO_Y_COMA": ";"
+        }
+      },
+      "IMPORT": {
+        "RESERVADA": "import",
+        "IDENTIFICADOR": "Tabla_Hash",
+        "PUNTO_Y_COMA": ";"
+      }
     },
-    {
-      "tipo": "INSTRUCCION_IMPORT",
-      "identificador": "Usuario"
-    },
-    {
-      "tipo": "INSTRUCCION_IMPORT",
-      "identificador": "Arbol_AVL"
-    },
-    {
-      "tipo": "INSTRUCCION_IMPORT",
-      "identificador": "Lista_Simple"
-    },
-    {
-      "tipo": "INSTRUCCION_IMPORT",
-      "identificador": "Tabla_Hash"
-    },
-    {
-      "tipo": "INSTRUCCION_IMPORT",
-      "identificador": "Login"
+    "IMPORT": {
+      "RESERVADA": "import",
+      "IDENTIFICADOR": "Login",
+      "PUNTO_Y_COMA": ";"
     }
-  ],
-  "clases": [
-    {
-      "tipo": "INSTRUCCION_CLASS",
-      "identificador": "OperacionDATA",
-      "instrucciones": [
-        [
-          {
-            "tipo": "INSTRUCCION_DECLARACION",
-            "declaraciones": [
-              {
-                "tipo_dato": "int",
-                "identificador": "a",
-                "expresion": {
-                  "tipo": "VALOR_NUMERO",
-                  "valor": 5
-                }
-              }
-            ]
-          },
-          {
-            "tipo": "INSTRUCCION_DECLARACION",
-            "declaraciones": [
-              {
-                "tipo_dato": "String",
-                "identificador": "segundoParam",
-                "expresion": {
-                  "tipo": "VALOR_CADENA",
-                  "valor": "Usted no \\\" anda fresco"
-                }
-              }
-            ]
-          },
-          {
-            "tipo": "INSTRUCCION_DECLARACION",
-            "declaraciones": [
-              {
-                "tipo_dato": "char",
-                "identificador": "caracter",
-                "expresion": {
-                  "tipo": "VALOR_CARACTER",
-                  "valor": "#"
-                }
-              }
-            ]
-          },
-          {
-            "tipo": "INSTRUCCION_DECLARACION",
-            "declaraciones": [
-              {
-                "tipo_dato": "boolean",
-                "identificador": "booleano",
-                "expresion": {
-                  "tipo": "VALOR_LOGICO",
-                  "valor": "false"
-                }
-              }
-            ]
-          },
-          {
-            "tipo": "INSTRUCCION_DECLARACION",
-            "declaraciones": [
-              {
-                "tipo_dato": "double",
-                "identificador": "valor_doble",
-                "expresion": {
-                  "tipo": "VALOR_NUMERO",
-                  "valor": 15.56
-                }
-              }
-            ]
-          },
-          {
-            "tipo": "INSTRUCCION_DECLARACION",
-            "declaraciones": [
-              {
-                "tipo_dato": "int",
-                "identificador": "_hola"
-              },
-              {
-                "tipo_dato": "int",
-                "identificador": "Primero"
-              },
-              {
-                "tipo_dato": "int",
-                "identificador": "Ultimo"
-              }
-            ]
-          },
-          {
-            "tipo": "INSTRUCCION_DECLARACION",
-            "declaraciones": [
-              {
-                "tipo_dato": "int",
-                "identificador": "numero"
-              },
-              {
-                "tipo_dato": "int",
-                "identificador": "no1",
-                "expresion": {
-                  "tipo": "VALOR_NUMERO",
-                  "valor": 8
-                }
-              },
-              {
-                "tipo_dato": "int",
-                "identificador": "no2",
-                "expresion": {
-                  "tipo": "VALOR_NUMERO",
-                  "valor": 4
-                }
-              },
-              {
-                "tipo_dato": "int",
-                "identificador": "no3"
-              }
-            ]
-          },
-          {
-            "tipo": "METODO",
-            "identificador": "main",
-            "instrucciones": [
-              {
-                "tipo": "INSTRUCCION_DECLARACION",
-                "declaraciones": [
-                  {
-                    "tipo_dato": "int",
-                    "identificador": "a",
-                    "expresion": {
-                      "tipo": "VALOR_NUMERO",
-                      "valor": 0
-                    }
-                  }
-                ]
-              },
-              {
-                "tipo": "INSTRUCCION_SWITCH",
-                "expresion": {
-                  "tipo": "VALOR_IDENTIFICADOR",
-                  "valor": "a"
-                },
-                "casos": [
-                  {
-                    "tipo": "CASE",
-                    "expresion": {
-                      "tipo": "VALOR_NUMERO",
-                      "valor": 1
-                    },
-                    "instrucciones": [
-                      {
-                        "tipo": "INSTRUCCION_IF",
-                        "expresion": {
-                          "tipo": "VALOR_LOGICO",
-                          "valor": "true"
-                        },
-                        "instrucciones": [
-                          {
-                            "tipo": "INSTRUCCION_PRINT",
-                            "expresion": {
-                              "tipo": "VALOR_CADENA",
-                              "valor": "Hola"
-                            }
-                          }
-                        ],
-                        "alternativas": [
-                          {
-                            "tipo": "INSTRUCCION_ELSE",
-                            "instrucciones": [
-                              {
-                                "tipo": "INSTRUCCION_PRINT",
-                                "expresion": {
-                                  "tipo": "VALOR_CADENA",
-                                  "valor": "No hola"
-                                }
-                              }
-                            ]
-                          }
-                        ]
-                      },
-                      {
-                        "tipo": "INSTRUCCION_BREAK"
-                      }
-                    ]
-                  },
-                  {
-                    "tipo": "CASE",
-                    "expresion": {
-                      "tipo": "VALOR_NUMERO",
-                      "valor": 2
-                    },
-                    "instrucciones": [
-                      {
-                        "tipo": "INSTRUCCION_WHILE",
-                        "expresion": {
-                          "operandoIzq": {
-                            "tipo": "VALOR_IDENTIFICADOR",
-                            "valor": "a"
-                          },
-                          "operandoDer": {
-                            "tipo": "VALOR_NUMERO",
-                            "valor": 0
-                          },
-                          "operacion": "OP_DISTINTO"
-                        },
-                        "instrucciones": [
-                          {
-                            "tipo": "INSTRUCCION_CONTINUE"
-                          }
-                        ]
-                      },
-                      {
-                        "tipo": "INSTRUCCION_BREAK"
-                      }
-                    ]
-                  },
-                  {
-                    "tipo": "CASE",
-                    "expresion": {
-                      "tipo": "VALOR_NUMERO",
-                      "valor": 3
-                    },
-                    "instrucciones": [
-                      {
-                        "tipo": "INSTRUCCION_DECLARACION",
-                        "declaraciones": [
-                          {
-                            "tipo_dato": "int",
-                            "identificador": "h",
-                            "expresion": {
-                              "tipo": "VALOR_NUMERO",
-                              "valor": 14
-                            }
-                          }
-                        ]
-                      },
-                      {
-                        "tipo": "INSTRUCCION_PRINT",
-                        "expresion": {
-                          "tipo": "VALOR_CADENA",
-                          "valor": "Hola nada"
-                        }
-                      },
-                      {
-                        "tipo": "INSTRUCCION_PRINT",
-                        "expresion": {
-                          "tipo": "VALOR_CADENA",
-                          "valor": "Hola bebe"
-                        }
-                      },
-                      {
-                        "tipo": "INSTRUCCION_BREAK"
-                      }
-                    ]
-                  },
-                  {
-                    "tipo": "CASE",
-                    "expresion": {
-                      "tipo": "VALOR_NUMERO",
-                      "valor": 4
-                    },
-                    "instrucciones": [
-                      {
-                        "tipo": "INSTRUCCION_DECLARACION",
-                        "declaraciones": [
-                          {
-                            "tipo_dato": "int",
-                            "identificador": "h",
-                            "expresion": {
-                              "tipo": "VALOR_NUMERO",
-                              "valor": 30
-                            }
-                          }
-                        ]
-                      },
-                      {
-                        "tipo": "INSTRUCCION_BREAK"
-                      }
-                    ]
-                  },
-                  {
-                    "tipo": "DEFAULT",
-                    "instrucciones": [
-                      {
-                        "tipo": "INSTRUCCION_BREAK"
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "tipo": "INSTRUCCION_PRINT",
-                "expresion": {
-                  "tipo": "VALOR_CADENA",
-                  "valor": "HOLA RES"
-                }
-              },
-              {
-                "tipo": "LLAMADA_A_FUNCION",
-                "identificador": "NoDevuelvoNada",
-                "parametros": [
-                  {
-                    "tipo": "VALOR_IDENTIFICADOR",
-                    "valor": "b"
-                  },
-                  {
-                    "tipo": "VALOR_IDENTIFICADOR",
-                    "valor": "c"
-                  }
-                ]
-              },
-              {
-                "tipo": "INSTRUCCION_ASIGANCION",
-                "identificador": "a",
-                "expresion": {
-                  "tipo": "VALOR_IDENTIFICADOR",
-                  "valor": "b"
-                }
-              },
-              {
-                "tipo": "INSTRUCCION_DECLARACION",
-                "declaraciones": [
-                  {
-                    "tipo_dato": "String",
-                    "identificador": "frescura",
-                    "expresion": {
-                      "tipo": "VALOR_FUNCION",
-                      "valor": {
-                        "tipo": "LLAMADA_A_FUNCION",
-                        "identificador": "funcion_string",
-                        "parametros": []
-                      }
-                    }
-                  }
-                ]
-              },
-              {
-                "tipo": "INSTRUCCION_DECLARACION",
-                "declaraciones": [
-                  {
-                    "tipo_dato": "int",
-                    "identificador": "frescura2",
-                    "expresion": {
-                      "operandoIzq": {
-                        "operandoIzq": {
-                          "operandoIzq": {
-                            "tipo": "VALOR_NUMERO",
-                            "valor": 5
-                          },
-                          "operacion": "OP_NEGATIVO"
-                        },
-                        "operandoDer": {
-                          "operandoIzq": {
-                            "tipo": "VALOR_FUNCION",
-                            "valor": {
-                              "tipo": "LLAMADA_A_FUNCION",
-                              "identificador": "funcion_int",
-                              "parametros": [
-                                {
-                                  "tipo": "VALOR_IDENTIFICADOR",
-                                  "valor": "no1"
-                                },
-                                {
-                                  "tipo": "VALOR_IDENTIFICADOR",
-                                  "valor": "frescura"
-                                }
-                              ]
-                            }
-                          },
-                          "operacion": "OP_NEGATIVO"
-                        },
-                        "operacion": "OP_MULTIPLICACION"
-                      },
-                      "operandoDer": {
-                        "tipo": "VALOR_NUMERO",
-                        "valor": 9
-                      },
-                      "operacion": "OP_SUMA"
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "tipo": "METODO",
-            "identificador": "NoDevuelvoNada",
-            "instrucciones": [
-              {
-                "tipo": "INSTRUCCION_PRINT",
-                "expresion": {
-                  "tipo": "VALOR_CADENA",
-                  "valor": "NO DEVUELVO NADA"
-                }
-              },
-              {
-                "tipo": "INSTRUCCION_FOR",
-                "variables": {
-                  "tipo": "INSTRUCCION_DECLARACION",
-                  "declaraciones": [
-                    {
-                      "tipo_dato": "int",
-                      "identificador": "i",
-                      "expresion": {
-                        "tipo": "VALOR_NUMERO",
-                        "valor": 0
-                      }
-                    },
-                    {
-                      "tipo_dato": "int",
-                      "identificador": "a",
-                      "expresion": {
-                        "tipo": "VALOR_NUMERO",
-                        "valor": 3
-                      }
-                    }
-                  ]
-                },
-                "expresion": {
-                  "operandoIzq": {
-                    "tipo": "VALOR_IDENTIFICADOR",
-                    "valor": "i"
-                  },
-                  "operandoDer": {
-                    "tipo": "VALOR_NUMERO",
-                    "valor": 10
-                  },
-                  "operacion": "OP_MENOR_QUE"
-                },
-                "modificacionesVar": [
-                  {
-                    "tipo": "INSTRUCCION_ASIGANCION",
-                    "identificador": "i",
-                    "expresion": "++"
-                  }
-                ],
-                "instrucciones": ")"
-              }
-            ]
-          },
-          {
-            "tipo": "FUNCION",
-            "tipo_funcion": "String",
-            "identificador": "funcion_string",
-            "instrucciones": [
-              {
-                "tipo": "INSTRUCCION_DO_WHILE",
-                "expresion": {
-                  "operandoIzq": {
-                    "tipo": "VALOR_IDENTIFICADOR",
-                    "valor": "a"
-                  },
-                  "operandoDer": {
-                    "tipo": "VALOR_NUMERO",
-                    "valor": 5
-                  },
-                  "operacion": "OP_MAYOR_IGUAL_QUE"
-                },
-                "instrucciones": [
-                  {
-                    "tipo": "INSTRUCCION_WHILE",
-                    "expresion": {
-                      "tipo": "VALOR_IDENTIFICADOR",
-                      "valor": "booleano"
-                    },
-                    "instrucciones": [
-                      {
-                        "tipo": "INSTRUCCION_CONTINUE"
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "tipo": "INSTRUCCION_RETURN",
-                "valor": {
-                  "tipo": "VALOR_CADENA",
-                  "valor": ""
-                }
-              }
-            ]
-          },
-          {
-            "tipo": "FUNCION",
-            "tipo_funcion": "int",
-            "identificador": "funcion_int",
-            "parametros": [
-              {
-                "tipo": "PARAMETRO",
-                "tipo_dato": "int",
-                "identificador": "numeor1"
-              },
-              {
-                "tipo": "PARAMETRO",
-                "tipo_dato": "String",
-                "identificador": "frescura"
-              }
-            ],
-            "instrucciones": [
-              {
-                "tipo": "INSTRUCCION_IF",
-                "expresion": {
-                  "tipo": "VALOR_IDENTIFICADOR",
-                  "valor": "booleano"
-                },
-                "instrucciones": [
-                  {
-                    "tipo": "INSTRUCCION_RETURN",
-                    "valor": {
-                      "tipo": "VALOR_NUMERO",
-                      "valor": 5
-                    }
-                  }
-                ],
-                "alternativas": [
-                  {
-                    "tipo": "INSTRUCCION_IF",
-                    "expresion": {
-                      "operandoIzq": {
-                        "tipo": "VALOR_IDENTIFICADOR",
-                        "valor": "no1"
-                      },
-                      "operandoDer": {
-                        "tipo": "VALOR_NUMERO",
-                        "valor": 5
-                      },
-                      "operacion": "OP_MAYOR_QUE"
-                    },
-                    "instrucciones": [
-                      {
-                        "tipo": "INSTRUCCION_RETURN",
-                        "valor": {
-                          "tipo": "VALOR_NUMERO",
-                          "valor": 8
-                        }
-                      }
-                    ],
-                    "alternativas": [
-                      {
-                        "tipo": "INSTRUCCION_IF",
-                        "expresion": {
-                          "operandoIzq": {
-                            "tipo": "VALOR_IDENTIFICADOR",
-                            "valor": "no2"
-                          },
-                          "operandoDer": {
-                            "tipo": "VALOR_NUMERO",
-                            "valor": 5
-                          },
-                          "operacion": "OP_MAYOR_QUE"
-                        },
-                        "instrucciones": [
-                          {
-                            "tipo": "INSTRUCCION_RETURN",
-                            "valor": {
-                              "tipo": "VALOR_NUMERO",
-                              "valor": 8
-                            }
-                          }
-                        ],
-                        "alternativas": [
-                          {
-                            "tipo": "INSTRUCCION_ELSE",
-                            "instrucciones": [
-                              {
-                                "tipo": "INSTRUCCION_RETURN",
-                                "valor": {
-                                  "tipo": "VALOR_NUMERO",
-                                  "valor": 3
-                                }
-                              }
-                            ]
-                          }
-                        ]
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "tipo": "METODO",
-            "identificador": "eliminarUsuario",
-            "parametros": [
-              {
-                "tipo": "PARAMETRO",
-                "tipo_dato": "String",
-                "identificador": "busqueda"
-              }
-            ],
-            "instrucciones": [
-              {
-                "tipo": "INSTRUCCION_DECLARACION",
-                "declaraciones": [
-                  {
-                    "tipo_dato": "int",
-                    "identificador": "actual",
-                    "expresion": {
-                      "tipo": "VALOR_IDENTIFICADOR",
-                      "valor": "Primero"
-                    }
-                  }
-                ]
-              },
-              {
-                "tipo": "INSTRUCCION_DECLARACION",
-                "declaraciones": [
-                  {
-                    "tipo_dato": "int",
-                    "identificador": "anterior",
-                    "expresion": {
-                      "tipo": "VALOR_IDENTIFICADOR",
-                      "valor": "null"
-                    }
-                  }
-                ]
-              },
-              {
-                "tipo": "INSTRUCCION_DECLARACION",
-                "declaraciones": [
-                  {
-                    "tipo_dato": "boolean",
-                    "identificador": "bandera",
-                    "expresion": {
-                      "tipo": "VALOR_LOGICO",
-                      "valor": "false"
-                    }
-                  }
-                ]
-              },
-              {
-                "tipo": "INSTRUCCION_IF",
-                "expresion": {
-                  "operandoIzq": {
-                    "tipo": "VALOR_IDENTIFICADOR",
-                    "valor": "Primero"
-                  },
-                  "operandoDer": {
-                    "tipo": "VALOR_IDENTIFICADOR",
-                    "valor": "null"
-                  },
-                  "operacion": "OP_DISTINTO"
-                },
-                "instrucciones": [
-                  {
-                    "tipo": "INSTRUCCION_WHILE",
-                    "expresion": {
-                      "operandoIzq": {
-                        "operandoIzq": {
-                          "tipo": "VALOR_IDENTIFICADOR",
-                          "valor": "actual"
-                        },
-                        "operandoDer": {
-                          "tipo": "VALOR_IDENTIFICADOR",
-                          "valor": "null"
-                        },
-                        "operacion": "OP_DISTINTO"
-                      },
-                      "operandoDer": {
-                        "operandoIzq": {
-                          "tipo": "VALOR_IDENTIFICADOR",
-                          "valor": "bandera"
-                        },
-                        "operacion": "OP_NOT"
-                      },
-                      "operacion": "OP_AND"
-                    },
-                    "instrucciones": [
-                      {
-                        "tipo": "INSTRUCCION_DECLARACION",
-                        "declaraciones": [
-                          {
-                            "tipo_dato": "String",
-                            "identificador": "carnet",
-                            "expresion": {
-                              "operandoIzq": {
-                                "tipo": "VALOR_FUNCION",
-                                "valor": {
-                                  "tipo": "LLAMADA_A_FUNCION",
-                                  "identificador": "getCarnet",
-                                  "parametros": []
+  },
+  "CLASS": {
+    "CLASSP": {
+      "RESERVADA": "class",
+      "IDENTIFICADOR": "OperacionDATA",
+      "BLOQUE_CLASE": {
+        "LLAVE_APERTURA": "{",
+        "BLOQUE_CLASEP": {
+          "BLOQUE_CLASEP": {
+            "BLOQUE_CLASEP": {
+              "BLOQUE_CLASEP": {
+                "BLOQUE_CLASEP": {
+                  "BLOQUE_CLASEP": {
+                    "BLOQUE_CLASEP": {
+                      "BLOQUE_CLASEP": {
+                        "BLOQUE_CLASEP": {
+                          "BLOQUE_CLASEP": {
+                            "BLOQUE_CLASEP": {
+                              "BLOQUE_CLASEP": {
+                                "BLOQUE_CLASEPP": {
+                                  "DECLARACION": {
+                                    "TIPO": "int",
+                                    "DECLARACIONP": {
+                                      "DECLARACIONPP": {
+                                        "IDENTIFICADOR": "a",
+                                        "ASIGNACION": "=",
+                                        "EXPRESION": {
+                                          "NUMERO": 5
+                                        }
+                                      }
+                                    },
+                                    "PUNTO_Y_COMA": ";"
+                                  }
                                 }
                               },
-                              "operandoDer": {
-                                "tipo": "VALOR_CADENA",
-                                "valor": ""
-                              },
-                              "operacion": "OP_SUMA"
-                            }
-                          }
-                        ]
-                      },
-                      {
-                        "tipo": "INSTRUCCION_IF",
-                        "expresion": {
-                          "tipo": "VALOR_FUNCION",
-                          "valor": {
-                            "tipo": "LLAMADA_A_FUNCION",
-                            "identificador": "equals",
-                            "parametros": [
-                              {
-                                "tipo": "VALOR_IDENTIFICADOR",
-                                "valor": "carnet"
+                              "BLOQUE_CLASEPP": {
+                                "DECLARACION": {
+                                  "TIPO": "String",
+                                  "DECLARACIONP": {
+                                    "DECLARACIONPP": {
+                                      "IDENTIFICADOR": "segundoParam",
+                                      "ASIGNACION": "=",
+                                      "EXPRESION": {
+                                        "CADENA": "Usted no \\\" anda fresco"
+                                      }
+                                    }
+                                  },
+                                  "PUNTO_Y_COMA": ";"
+                                }
                               }
-                            ]
-                          }
-                        },
-                        "instrucciones": [
-                          {
-                            "tipo": "INSTRUCCION_ASIGANCION",
-                            "identificador": "bandera",
-                            "expresion": {
-                              "tipo": "VALOR_LOGICO",
-                              "valor": "true"
-                            }
-                          },
-                          {
-                            "tipo": "INSTRUCCION_BREAK"
-                          }
-                        ],
-                        "alternativas": []
-                      },
-                      {
-                        "tipo": "INSTRUCCION_ASIGANCION",
-                        "identificador": "anterior",
-                        "expresion": {
-                          "tipo": "VALOR_IDENTIFICADOR",
-                          "valor": "actual"
-                        }
-                      },
-                      {
-                        "tipo": "INSTRUCCION_ASIGANCION",
-                        "identificador": "actual",
-                        "expresion": {
-                          "tipo": "VALOR_FUNCION",
-                          "valor": {
-                            "tipo": "LLAMADA_A_FUNCION",
-                            "identificador": "getSiguiente",
-                            "parametros": []
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ],
-                "alternativas": []
-              },
-              {
-                "tipo": "INSTRUCCION_IF",
-                "expresion": {
-                  "tipo": "VALOR_IDENTIFICADOR",
-                  "valor": "bandera"
-                },
-                "instrucciones": [
-                  {
-                    "tipo": "INSTRUCCION_IF",
-                    "expresion": {
-                      "operandoIzq": {
-                        "tipo": "VALOR_IDENTIFICADOR",
-                        "valor": "actual"
-                      },
-                      "operandoDer": {
-                        "tipo": "VALOR_IDENTIFICADOR",
-                        "valor": "Primero"
-                      },
-                      "operacion": "OP_IGUALDAD"
-                    },
-                    "instrucciones": [
-                      {
-                        "tipo": "INSTRUCCION_ASIGANCION",
-                        "identificador": "Primero",
-                        "expresion": {
-                          "tipo": "VALOR_FUNCION",
-                          "valor": {
-                            "tipo": "LLAMADA_A_FUNCION",
-                            "identificador": "getSiguiente",
-                            "parametros": []
-                          }
-                        }
-                      }
-                    ],
-                    "alternativas": [
-                      {
-                        "tipo": "INSTRUCCION_IF",
-                        "expresion": {
-                          "operandoIzq": {
-                            "tipo": "VALOR_IDENTIFICADOR",
-                            "valor": "actual"
-                          },
-                          "operandoDer": {
-                            "tipo": "VALOR_IDENTIFICADOR",
-                            "valor": "Ultimo"
-                          },
-                          "operacion": "OP_IGUALDAD"
-                        },
-                        "instrucciones": [
-                          {
-                            "tipo": "INSTRUCCION_ASIGANCION",
-                            "identificador": "Ultimo",
-                            "expresion": {
-                              "tipo": "VALOR_IDENTIFICADOR",
-                              "valor": "anterior"
-                            }
-                          }
-                        ],
-                        "alternativas": [
-                          {
-                            "tipo": "INSTRUCCION_ELSE",
-                            "instrucciones": [
-                              {
-                                "tipo": "LLAMADA_A_FUNCION",
-                                "identificador": "setSiguiente",
-                                "parametros": [
-                                  {
-                                    "tipo": "VALOR_FUNCION",
-                                    "valor": {
-                                      "tipo": "LLAMADA_A_FUNCION",
-                                      "identificador": "getSiguiente",
-                                      "parametros": []
+                            },
+                            "BLOQUE_CLASEPP": {
+                              "DECLARACION": {
+                                "TIPO": "char",
+                                "DECLARACIONP": {
+                                  "DECLARACIONPP": {
+                                    "IDENTIFICADOR": "caracter",
+                                    "ASIGNACION": "=",
+                                    "EXPRESION": {
+                                      "CARACTER": "#"
                                     }
                                   }
-                                ]
+                                },
+                                "PUNTO_Y_COMA": ";"
                               }
-                            ]
+                            }
+                          },
+                          "BLOQUE_CLASEPP": {
+                            "DECLARACION": {
+                              "TIPO": "boolean",
+                              "DECLARACIONP": {
+                                "DECLARACIONPP": {
+                                  "IDENTIFICADOR": "booleano",
+                                  "ASIGNACION": "=",
+                                  "EXPRESION": {
+                                    "LOGICO": "false"
+                                  }
+                                }
+                              },
+                              "PUNTO_Y_COMA": ";"
+                            }
                           }
-                        ]
-                      }
-                    ]
-                  }
-                ],
-                "alternativas": [
-                  {
-                    "tipo": "INSTRUCCION_ELSE",
-                    "instrucciones": [
-                      {
-                        "tipo": "INSTRUCCION_PRINT",
-                        "expresion": {
-                          "tipo": "VALOR_CADENA",
-                          "valor": "USUARIO NO ENCOTRADO EN LA LISTA SIMPLE"
+                        },
+                        "BLOQUE_CLASEPP": {
+                          "DECLARACION": {
+                            "TIPO": "double",
+                            "DECLARACIONP": {
+                              "DECLARACIONPP": {
+                                "IDENTIFICADOR": "valor_doble",
+                                "ASIGNACION": "=",
+                                "EXPRESION": {
+                                  "NUMERO": 15.56
+                                }
+                              }
+                            },
+                            "PUNTO_Y_COMA": ";"
+                          }
+                        }
+                      },
+                      "BLOQUE_CLASEPP": {
+                        "DECLARACION": {
+                          "TIPO": "int",
+                          "DECLARACIONP": {
+                            "DECLARACIONP": {
+                              "DECLARACIONP": {
+                                "DECLARACIONPP": {
+                                  "IDENTIFICADOR": "_hola"
+                                }
+                              },
+                              "COMA": ",",
+                              "DECLARACIONPP": {
+                                "IDENTIFICADOR": "Primero"
+                              }
+                            },
+                            "COMA": ",",
+                            "DECLARACIONPP": {
+                              "IDENTIFICADOR": "Ultimo"
+                            }
+                          },
+                          "PUNTO_Y_COMA": ";"
                         }
                       }
-                    ]
+                    },
+                    "BLOQUE_CLASEPP": {
+                      "DECLARACION": {
+                        "TIPO": "int",
+                        "DECLARACIONP": {
+                          "DECLARACIONP": {
+                            "DECLARACIONP": {
+                              "DECLARACIONP": {
+                                "DECLARACIONPP": {
+                                  "IDENTIFICADOR": "numero"
+                                }
+                              },
+                              "COMA": ",",
+                              "DECLARACIONPP": {
+                                "IDENTIFICADOR": "no1",
+                                "ASIGNACION": "=",
+                                "EXPRESION": {
+                                  "NUMERO": 8
+                                }
+                              }
+                            },
+                            "COMA": ",",
+                            "DECLARACIONPP": {
+                              "IDENTIFICADOR": "no2",
+                              "ASIGNACION": "=",
+                              "EXPRESION": {
+                                "NUMERO": 4
+                              }
+                            }
+                          },
+                          "COMA": ",",
+                          "DECLARACIONPP": {
+                            "IDENTIFICADOR": "no3"
+                          }
+                        },
+                        "PUNTO_Y_COMA": ";"
+                      }
+                    }
+                  },
+                  "BLOQUE_CLASEPP": {
+                    "METODOS": {
+                      "RESERVADA": "void",
+                      "IDENTIFICADOR": "main",
+                      "PARENTESIS_APERTURA": "(",
+                      "PARENTESIS_CIERRE": ")",
+                      "BLOQUE_METODO": {
+                        "LLAVE_APERTURA": "{",
+                        "INSTRUCCIONES": {
+                          "INSTRUCCIONES": {
+                            "INSTRUCCIONES": {
+                              "INSTRUCCIONES": {
+                                "INSTRUCCIONES": {
+                                  "INSTRUCCIONES": {
+                                    "INSTRUCCIONES": {
+                                      "INSTRUCCION": {
+                                        "DECLARACION": {
+                                          "TIPO": "int",
+                                          "DECLARACIONP": {
+                                            "DECLARACIONPP": {
+                                              "IDENTIFICADOR": "a",
+                                              "ASIGNACION": "=",
+                                              "EXPRESION": {
+                                                "NUMERO": 0
+                                              }
+                                            }
+                                          },
+                                          "PUNTO_Y_COMA": ";"
+                                        }
+                                      }
+                                    },
+                                    "INSTRUCCION": {
+                                      "SWITCH": {
+                                        "RESERVADA": "switch",
+                                        "CONDICION": {
+                                          "PARENTESIS_APERTURA": "(",
+                                          "EXPRESION": {
+                                            "IDENTIFICADOR": "a"
+                                          },
+                                          "PARENTESIS_CIERRE": ")"
+                                        },
+                                        "LLAVE_APERTURA": "{",
+                                        "CASOS": {
+                                          "CASOS": {
+                                            "CASOS": {
+                                              "CASOS": {
+                                                "CASOS": {
+                                                  "CASO": {
+                                                    "RESERVADA": "case",
+                                                    "EXPRESION": {
+                                                      "NUMERO": 1
+                                                    },
+                                                    "DOS_PUNTOS": ":",
+                                                    "INSTRUCCIONES": {
+                                                      "INSTRUCCIONES": {
+                                                        "INSTRUCCION": {
+                                                          "IF": {
+                                                            "RESERVADA": "if",
+                                                            "CONDICION": {
+                                                              "PARENTESIS_APERTURA": "(",
+                                                              "EXPRESION": {
+                                                                "LOGICO": "true"
+                                                              },
+                                                              "PARENTESIS_CIERRE": ")"
+                                                            },
+                                                            "BLOQUE_INSTRUCCIONES": {
+                                                              "LLAVE_APERTURA": "{",
+                                                              "INSTRUCCIONES": {
+                                                                "INSTRUCCION": {
+                                                                  "PRINT": {
+                                                                    "RESERVADA": "System.out.println",
+                                                                    "PARENTESIS_APERTURA": "(",
+                                                                    "EXPRESION": {
+                                                                      "CADENA": "Hola"
+                                                                    },
+                                                                    "PARENTESIS_CIERRE": ")",
+                                                                    "PUNTO_Y_COMA": ";"
+                                                                  }
+                                                                }
+                                                              },
+                                                              "LLAVE_CIERRE": "}"
+                                                            },
+                                                            "ELSE": {
+                                                              "RESERVADA": "else",
+                                                              "BLOQUE_INSTRUCCIONES": {
+                                                                "LLAVE_APERTURA": "{",
+                                                                "INSTRUCCIONES": {
+                                                                  "INSTRUCCION": {
+                                                                    "PRINT": {
+                                                                      "RESERVADA": "System.out.println",
+                                                                      "PARENTESIS_APERTURA": "(",
+                                                                      "EXPRESION": {
+                                                                        "CADENA": "No hola"
+                                                                      },
+                                                                      "PARENTESIS_CIERRE": ")",
+                                                                      "PUNTO_Y_COMA": ";"
+                                                                    }
+                                                                  }
+                                                                },
+                                                                "LLAVE_CIERRE": "}"
+                                                              }
+                                                            }
+                                                          }
+                                                        }
+                                                      },
+                                                      "INSTRUCCION": {
+                                                        "BREAK": {
+                                                          "RESERVADA": "break",
+                                                          "PUNTO_Y_COMA": ";"
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                },
+                                                "CASO": {
+                                                  "RESERVADA": "case",
+                                                  "EXPRESION": {
+                                                    "NUMERO": 2
+                                                  },
+                                                  "DOS_PUNTOS": ":",
+                                                  "INSTRUCCIONES": {
+                                                    "INSTRUCCIONES": {
+                                                      "INSTRUCCION": {
+                                                        "WHILE": {
+                                                          "RESERVADA": "while",
+                                                          "CONDICION": {
+                                                            "PARENTESIS_APERTURA": "(",
+                                                            "EXPRESION": {
+                                                              "EXPRESION_IZQ": {
+                                                                "IDENTIFICADOR": "a"
+                                                              },
+                                                              "OPERADOR": "!=",
+                                                              "EXPRESION_DERECHA": {
+                                                                "NUMERO": 0
+                                                              }
+                                                            },
+                                                            "PARENTESIS_CIERRE": ")"
+                                                          },
+                                                          "BLOQUE_INSTRUCCIONES": {
+                                                            "LLAVE_APERTURA": "{",
+                                                            "INSTRUCCIONES": {
+                                                              "INSTRUCCION": {
+                                                                "CONTINUE": {
+                                                                  "RESERVADA": "continue",
+                                                                  "PUNTO_Y_COMA": ";"
+                                                                }
+                                                              }
+                                                            },
+                                                            "LLAVE_CIERRE": "}"
+                                                          }
+                                                        }
+                                                      }
+                                                    },
+                                                    "INSTRUCCION": {
+                                                      "BREAK": {
+                                                        "RESERVADA": "break",
+                                                        "PUNTO_Y_COMA": ";"
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              },
+                                              "CASO": {
+                                                "RESERVADA": "case",
+                                                "EXPRESION": {
+                                                  "NUMERO": 3
+                                                },
+                                                "DOS_PUNTOS": ":",
+                                                "INSTRUCCIONES": {
+                                                  "INSTRUCCIONES": {
+                                                    "INSTRUCCIONES": {
+                                                      "INSTRUCCIONES": {
+                                                        "INSTRUCCION": {
+                                                          "DECLARACION": {
+                                                            "TIPO": "int",
+                                                            "DECLARACIONP": {
+                                                              "DECLARACIONPP": {
+                                                                "IDENTIFICADOR": "h",
+                                                                "ASIGNACION": "=",
+                                                                "EXPRESION": {
+                                                                  "NUMERO": 14
+                                                                }
+                                                              }
+                                                            },
+                                                            "PUNTO_Y_COMA": ";"
+                                                          }
+                                                        }
+                                                      },
+                                                      "INSTRUCCION": {
+                                                        "PRINT": {
+                                                          "RESERVADA": "System.out.println",
+                                                          "PARENTESIS_APERTURA": "(",
+                                                          "EXPRESION": {
+                                                            "CADENA": "Hola nada"
+                                                          },
+                                                          "PARENTESIS_CIERRE": ")",
+                                                          "PUNTO_Y_COMA": ";"
+                                                        }
+                                                      }
+                                                    },
+                                                    "INSTRUCCION": {
+                                                      "PRINT": {
+                                                        "RESERVADA": "System.out.println",
+                                                        "PARENTESIS_APERTURA": "(",
+                                                        "EXPRESION": {
+                                                          "CADENA": "Hola bebe"
+                                                        },
+                                                        "PARENTESIS_CIERRE": ")",
+                                                        "PUNTO_Y_COMA": ";"
+                                                      }
+                                                    }
+                                                  },
+                                                  "INSTRUCCION": {
+                                                    "BREAK": {
+                                                      "RESERVADA": "break",
+                                                      "PUNTO_Y_COMA": ";"
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            },
+                                            "CASO": {
+                                              "RESERVADA": "case",
+                                              "EXPRESION": {
+                                                "NUMERO": 4
+                                              },
+                                              "DOS_PUNTOS": ":",
+                                              "INSTRUCCIONES": {
+                                                "INSTRUCCIONES": {
+                                                  "INSTRUCCION": {
+                                                    "DECLARACION": {
+                                                      "TIPO": "int",
+                                                      "DECLARACIONP": {
+                                                        "DECLARACIONPP": {
+                                                          "IDENTIFICADOR": "h",
+                                                          "ASIGNACION": "=",
+                                                          "EXPRESION": {
+                                                            "NUMERO": 30
+                                                          }
+                                                        }
+                                                      },
+                                                      "PUNTO_Y_COMA": ";"
+                                                    }
+                                                  }
+                                                },
+                                                "INSTRUCCION": {
+                                                  "BREAK": {
+                                                    "RESERVADA": "break",
+                                                    "PUNTO_Y_COMA": ";"
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          },
+                                          "CASO": {
+                                            "RESERVADA": "default",
+                                            "DOS_PUNTOS": ":",
+                                            "INSTRUCCIONES": {
+                                              "INSTRUCCION": {
+                                                "BREAK": {
+                                                  "RESERVADA": "break",
+                                                  "PUNTO_Y_COMA": ";"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        },
+                                        "LLAVE_CIERRE": "}"
+                                      }
+                                    }
+                                  },
+                                  "INSTRUCCION": {
+                                    "PRINT": {
+                                      "RESERVADA": "System.out.println",
+                                      "PARENTESIS_APERTURA": "(",
+                                      "EXPRESION": {
+                                        "CADENA": "HOLA RES"
+                                      },
+                                      "PARENTESIS_CIERRE": ")",
+                                      "PUNTO_Y_COMA": ";"
+                                    }
+                                  }
+                                },
+                                "INSTRUCCION": {
+                                  "LLAMADA_DE_FUNCION": {
+                                    "IDENTIFICADOR": "NoDevuelvoNada",
+                                    "PARENTESIS_APERTURA": "(",
+                                    "PARAMETROS": {
+                                      "PARAMETROS": {
+                                        "EXPRESION": {
+                                          "IDENTIFICADOR": "b"
+                                        }
+                                      },
+                                      "COMA": ",",
+                                      "EXPRESION": {
+                                        "IDENTIFICADOR": "c"
+                                      }
+                                    },
+                                    "PARENTESIS_CIERRE": ")",
+                                    "PUNTO_Y_COMA": ";"
+                                  }
+                                }
+                              },
+                              "INSTRUCCION": {
+                                "ASIGNACION_VARIABLE": {
+                                  "IDENTIFICADOR": "a",
+                                  "ASIGNACION": "=",
+                                  "EXPRESION": {
+                                    "IDENTIFICADOR": "b"
+                                  },
+                                  "PUNTO_Y_COMA": ";"
+                                }
+                              }
+                            },
+                            "INSTRUCCION": {
+                              "DECLARACION": {
+                                "TIPO": "String",
+                                "DECLARACIONP": {
+                                  "DECLARACIONPP": {
+                                    "IDENTIFICADOR": "frescura",
+                                    "ASIGNACION": "=",
+                                    "EXPRESION": {
+                                      "LLAMADA_DE_FUNCION": {
+                                        "IDENTIFICADOR": "funcion_string",
+                                        "PARENTESIS_APERTURA": "(",
+                                        "PARENTESIS_CIERRE": ")"
+                                      }
+                                    }
+                                  }
+                                },
+                                "PUNTO_Y_COMA": ";"
+                              }
+                            }
+                          },
+                          "INSTRUCCION": {
+                            "DECLARACION": {
+                              "TIPO": "int",
+                              "DECLARACIONP": {
+                                "DECLARACIONPP": {
+                                  "IDENTIFICADOR": "frescura2",
+                                  "ASIGNACION": "=",
+                                  "EXPRESION": {
+                                    "EXPRESION_IZQ": {
+                                      "EXPRESION_IZQ": {
+                                        "OPERADOR": "-",
+                                        "EXPRESION_DERECHA": {
+                                          "NUMERO": 5
+                                        }
+                                      },
+                                      "OPERADOR": "*",
+                                      "EXPRESION_DERECHA": {
+                                        "OPERADOR": "-",
+                                        "EXPRESION_DERECHA": {
+                                          "LLAMADA_DE_FUNCION": {
+                                            "IDENTIFICADOR": "funcion_int",
+                                            "PARENTESIS_APERTURA": "(",
+                                            "PARAMETROS": {
+                                              "PARAMETROS": {
+                                                "EXPRESION": {
+                                                  "IDENTIFICADOR": "no1"
+                                                }
+                                              },
+                                              "COMA": ",",
+                                              "EXPRESION": {
+                                                "IDENTIFICADOR": "frescura"
+                                              }
+                                            },
+                                            "PARENTESIS_CIERRE": ")"
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "OPERADOR": "+",
+                                    "EXPRESION_DERECHA": {
+                                      "NUMERO": 9
+                                    }
+                                  }
+                                }
+                              },
+                              "PUNTO_Y_COMA": ";"
+                            }
+                          }
+                        },
+                        "LLAVE_CIERRE": "}"
+                      }
+                    }
                   }
-                ]
+                },
+                "BLOQUE_CLASEPP": {
+                  "METODOS": {
+                    "RESERVADA": "void",
+                    "IDENTIFICADOR": "NoDevuelvoNada",
+                    "PARENTESIS_APERTURA": "(",
+                    "PARENTESIS_CIERRE": ")",
+                    "BLOQUE_METODO": {
+                      "LLAVE_APERTURA": "{",
+                      "INSTRUCCIONES": {
+                        "INSTRUCCIONES": {
+                          "INSTRUCCION": {
+                            "PRINT": {
+                              "RESERVADA": "System.out.println",
+                              "PARENTESIS_APERTURA": "(",
+                              "EXPRESION": {
+                                "CADENA": "NO DEVUELVO NADA"
+                              },
+                              "PARENTESIS_CIERRE": ")",
+                              "PUNTO_Y_COMA": ";"
+                            }
+                          }
+                        },
+                        "INSTRUCCION": {
+                          "FOR": {
+                            "RESERVADA": "for",
+                            "PARENTESIS_APERTURA": "(",
+                            "DECLARACION": {
+                              "DECLARACION": {
+                                "TIPO": "int",
+                                "DECLARACIONP": {
+                                  "DECLARACIONP": {
+                                    "DECLARACIONPP": {
+                                      "IDENTIFICADOR": "i",
+                                      "ASIGNACION": "=",
+                                      "EXPRESION": {
+                                        "NUMERO": 0
+                                      }
+                                    }
+                                  },
+                                  "COMA": ",",
+                                  "DECLARACIONPP": {
+                                    "IDENTIFICADOR": "a",
+                                    "ASIGNACION": "=",
+                                    "EXPRESION": {
+                                      "NUMERO": 3
+                                    }
+                                  }
+                                },
+                                "PUNTO_Y_COMA": ";"
+                              }
+                            },
+                            "EXPRESION": {
+                              "EXPRESION_IZQ": {
+                                "IDENTIFICADOR": "i"
+                              },
+                              "OPERADOR": "<",
+                              "EXPRESION_DERECHA": {
+                                "NUMERO": 10
+                              }
+                            },
+                            "PUNTO_Y_COMA": ";",
+                            "MODIFICADORES_VAR": {
+                              "MODIFICADOR_VAR": {
+                                "IDENTIFICADOR": "i",
+                                "ASIGNACION": "++"
+                              }
+                            },
+                            "PARENTESIS_CIERRE": ")",
+                            "BLOQUE_INSTRUCCIONES": {
+                              "LLAVE_APERTURA": "{",
+                              "INSTRUCCIONES": {
+                                "INSTRUCCIONES": {
+                                  "INSTRUCCION": {
+                                    "PRINT": {
+                                      "RESERVADA": "System.out.println",
+                                      "PARENTESIS_APERTURA": "(",
+                                      "EXPRESION": {
+                                        "CADENA": "for"
+                                      },
+                                      "PARENTESIS_CIERRE": ")",
+                                      "PUNTO_Y_COMA": ";"
+                                    }
+                                  }
+                                },
+                                "INSTRUCCION": {
+                                  "IF": {
+                                    "RESERVADA": "if",
+                                    "CONDICION": {
+                                      "PARENTESIS_APERTURA": "(",
+                                      "EXPRESION": {
+                                        "IDENTIFICADOR": "booleano"
+                                      },
+                                      "PARENTESIS_CIERRE": ")"
+                                    },
+                                    "BLOQUE_INSTRUCCIONES": {
+                                      "LLAVE_APERTURA": "{",
+                                      "INSTRUCCIONES": {
+                                        "INSTRUCCION": {
+                                          "FOR": {
+                                            "RESERVADA": "for",
+                                            "PARENTESIS_APERTURA": "(",
+                                            "DECLARACION": {
+                                              "DECLARACION": {
+                                                "TIPO": "int",
+                                                "DECLARACIONP": {
+                                                  "DECLARACIONPP": {
+                                                    "IDENTIFICADOR": "j",
+                                                    "ASIGNACION": "=",
+                                                    "EXPRESION": {
+                                                      "NUMERO": 0
+                                                    }
+                                                  }
+                                                },
+                                                "PUNTO_Y_COMA": ";"
+                                              }
+                                            },
+                                            "EXPRESION": {
+                                              "EXPRESION_IZQ": {
+                                                "IDENTIFICADOR": "j"
+                                              },
+                                              "OPERADOR": "<",
+                                              "EXPRESION_DERECHA": {
+                                                "NUMERO": 10
+                                              }
+                                            },
+                                            "PUNTO_Y_COMA": ";",
+                                            "MODIFICADORES_VAR": {
+                                              "MODIFICADOR_VAR": {
+                                                "IDENTIFICADOR": "j",
+                                                "ASIGNACION": "++"
+                                              }
+                                            },
+                                            "PARENTESIS_CIERRE": ")",
+                                            "BLOQUE_INSTRUCCIONES": {
+                                              "LLAVE_APERTURA": "{",
+                                              "INSTRUCCIONES": {
+                                                "INSTRUCCION": {
+                                                  "WHILE": {
+                                                    "RESERVADA": "while",
+                                                    "CONDICION": {
+                                                      "PARENTESIS_APERTURA": "(",
+                                                      "EXPRESION": {
+                                                        "IDENTIFICADOR": "booleano"
+                                                      },
+                                                      "PARENTESIS_CIERRE": ")"
+                                                    },
+                                                    "BLOQUE_INSTRUCCIONES": {
+                                                      "LLAVE_APERTURA": "{",
+                                                      "INSTRUCCIONES": {
+                                                        "INSTRUCCION": {
+                                                          "CONTINUE": {
+                                                            "RESERVADA": "continue",
+                                                            "PUNTO_Y_COMA": ";"
+                                                          }
+                                                        }
+                                                      },
+                                                      "LLAVE_CIERRE": "}"
+                                                    }
+                                                  }
+                                                }
+                                              },
+                                              "LLAVE_CIERRE": "}"
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "LLAVE_CIERRE": "}"
+                                    }
+                                  }
+                                }
+                              },
+                              "LLAVE_CIERRE": "}"
+                            }
+                          }
+                        }
+                      },
+                      "LLAVE_CIERRE": "}"
+                    }
+                  }
+                }
+              },
+              "BLOQUE_CLASEPP": {
+                "FUNCIONES": {
+                  "TIPO": "String",
+                  "IDENTIFICADOR": "funcion_string",
+                  "PARENTESIS_APERTURA": "(",
+                  "PARENTESIS_CIERRE": ")",
+                  "BLOQUE_FUNCION": {
+                    "LLAVE_APERTURA": "{",
+                    "INSTRUCCIONES": {
+                      "INSTRUCCIONES": {
+                        "INSTRUCCION": {
+                          "DO_WHILE": {
+                            "RESERVADA": "do",
+                            "BLOQUE_INSTRUCCIONES": {
+                              "LLAVE_APERTURA": "{",
+                              "INSTRUCCIONES": {
+                                "INSTRUCCION": {
+                                  "WHILE": {
+                                    "RESERVADA": "while",
+                                    "CONDICION": {
+                                      "PARENTESIS_APERTURA": "(",
+                                      "EXPRESION": {
+                                        "IDENTIFICADOR": "booleano"
+                                      },
+                                      "PARENTESIS_CIERRE": ")"
+                                    },
+                                    "BLOQUE_INSTRUCCIONES": {
+                                      "LLAVE_APERTURA": "{",
+                                      "INSTRUCCIONES": {
+                                        "INSTRUCCION": {
+                                          "CONTINUE": {
+                                            "RESERVADA": "continue",
+                                            "PUNTO_Y_COMA": ";"
+                                          }
+                                        }
+                                      },
+                                      "LLAVE_CIERRE": "}"
+                                    }
+                                  }
+                                }
+                              },
+                              "LLAVE_CIERRE": "}"
+                            },
+                            "WHILE": "while",
+                            "CONDICION": {
+                              "PARENTESIS_APERTURA": "(",
+                              "EXPRESION": {
+                                "EXPRESION_IZQ": {
+                                  "IDENTIFICADOR": "a"
+                                },
+                                "OPERADOR": ">=",
+                                "EXPRESION_DERECHA": {
+                                  "NUMERO": 5
+                                }
+                              },
+                              "PARENTESIS_CIERRE": ")"
+                            },
+                            "PUNTO_Y_COMA": ";"
+                          }
+                        }
+                      },
+                      "INSTRUCCION": {
+                        "RETURN": {
+                          "RESERVADA": "return",
+                          "EXPRESION": {
+                            "CADENA": ""
+                          },
+                          "PUNTO_Y_COMA": ";"
+                        }
+                      }
+                    },
+                    "LLAVE_CIERRE": "}"
+                  }
+                }
               }
-            ]
+            },
+            "BLOQUE_CLASEPP": {
+              "FUNCIONES": {
+                "TIPO": "int",
+                "IDENTIFICADOR": "funcion_int",
+                "PARENTESIS_APERTURA": "(",
+                "PARAMETROS": {
+                  "PARAMETROS": {
+                    "PARAMETRO": {
+                      "TIPO": "int",
+                      "IDENTIFICADOR": "numeor1"
+                    }
+                  },
+                  "COMA": ",",
+                  "PARAMETRO": {
+                    "TIPO": "String",
+                    "IDENTIFICADOR": "frescura"
+                  }
+                },
+                "PARENTESIS_CIERRE": ")",
+                "BLOQUE_FUNCION": {
+                  "LLAVE_APERTURA": "{",
+                  "INSTRUCCIONES": {
+                    "INSTRUCCION": {
+                      "IF": {
+                        "RESERVADA": "if",
+                        "CONDICION": {
+                          "PARENTESIS_APERTURA": "(",
+                          "EXPRESION": {
+                            "IDENTIFICADOR": "booleano"
+                          },
+                          "PARENTESIS_CIERRE": ")"
+                        },
+                        "BLOQUE_INSTRUCCIONES": {
+                          "LLAVE_APERTURA": "{",
+                          "INSTRUCCIONES": {
+                            "INSTRUCCION": {
+                              "RETURN": {
+                                "RESERVADA": "return",
+                                "EXPRESION": {
+                                  "NUMERO": 5
+                                },
+                                "PUNTO_Y_COMA": ";"
+                              }
+                            }
+                          },
+                          "LLAVE_CIERRE": "}"
+                        },
+                        "ELSE_IF": {
+                          "RESERVADA": "else",
+                          "IF": {
+                            "RESERVADA": "if",
+                            "CONDICION": {
+                              "PARENTESIS_APERTURA": "(",
+                              "EXPRESION": {
+                                "EXPRESION_IZQ": {
+                                  "IDENTIFICADOR": "no1"
+                                },
+                                "OPERADOR": ">",
+                                "EXPRESION_DERECHA": {
+                                  "NUMERO": 5
+                                }
+                              },
+                              "PARENTESIS_CIERRE": ")"
+                            },
+                            "BLOQUE_INSTRUCCIONES": {
+                              "LLAVE_APERTURA": "{",
+                              "INSTRUCCIONES": {
+                                "INSTRUCCION": {
+                                  "RETURN": {
+                                    "RESERVADA": "return",
+                                    "EXPRESION": {
+                                      "NUMERO": 8
+                                    },
+                                    "PUNTO_Y_COMA": ";"
+                                  }
+                                }
+                              },
+                              "LLAVE_CIERRE": "}"
+                            },
+                            "ELSE_IF": {
+                              "RESERVADA": "else",
+                              "IF": {
+                                "RESERVADA": "if",
+                                "CONDICION": {
+                                  "PARENTESIS_APERTURA": "(",
+                                  "EXPRESION": {
+                                    "EXPRESION_IZQ": {
+                                      "IDENTIFICADOR": "no2"
+                                    },
+                                    "OPERADOR": ">",
+                                    "EXPRESION_DERECHA": {
+                                      "NUMERO": 5
+                                    }
+                                  },
+                                  "PARENTESIS_CIERRE": ")"
+                                },
+                                "BLOQUE_INSTRUCCIONES": {
+                                  "LLAVE_APERTURA": "{",
+                                  "INSTRUCCIONES": {
+                                    "INSTRUCCION": {
+                                      "RETURN": {
+                                        "RESERVADA": "return",
+                                        "EXPRESION": {
+                                          "NUMERO": 8
+                                        },
+                                        "PUNTO_Y_COMA": ";"
+                                      }
+                                    }
+                                  },
+                                  "LLAVE_CIERRE": "}"
+                                },
+                                "ELSE": {
+                                  "RESERVADA": "else",
+                                  "BLOQUE_INSTRUCCIONES": {
+                                    "LLAVE_APERTURA": "{",
+                                    "INSTRUCCIONES": {
+                                      "INSTRUCCION": {
+                                        "RETURN": {
+                                          "RESERVADA": "return",
+                                          "EXPRESION": {
+                                            "NUMERO": 3
+                                          },
+                                          "PUNTO_Y_COMA": ";"
+                                        }
+                                      }
+                                    },
+                                    "LLAVE_CIERRE": "}"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "LLAVE_CIERRE": "}"
+                }
+              }
+            }
+          },
+          "BLOQUE_CLASEPP": {
+            "METODOS": {
+              "RESERVADA": "void",
+              "IDENTIFICADOR": "eliminarUsuario",
+              "PARENTESIS_APERTURA": "(",
+              "ASIGNACION_DE_PARAMETROS": {
+                "PARAMETRO": {
+                  "TIPO": "String",
+                  "IDENTIFICADOR": "busqueda"
+                }
+              },
+              "PARENTESIS_CIERRE": ")",
+              "BLOQUE_METODO": {
+                "LLAVE_APERTURA": "{",
+                "INSTRUCCIONES": {
+                  "INSTRUCCIONES": {
+                    "INSTRUCCIONES": {
+                      "INSTRUCCIONES": {
+                        "INSTRUCCIONES": {
+                          "INSTRUCCION": {
+                            "DECLARACION": {
+                              "TIPO": "int",
+                              "DECLARACIONP": {
+                                "DECLARACIONPP": {
+                                  "IDENTIFICADOR": "actual",
+                                  "ASIGNACION": "=",
+                                  "EXPRESION": {
+                                    "IDENTIFICADOR": "Primero"
+                                  }
+                                }
+                              },
+                              "PUNTO_Y_COMA": ";"
+                            }
+                          }
+                        },
+                        "INSTRUCCION": {
+                          "DECLARACION": {
+                            "TIPO": "int",
+                            "DECLARACIONP": {
+                              "DECLARACIONPP": {
+                                "IDENTIFICADOR": "anterior",
+                                "ASIGNACION": "=",
+                                "EXPRESION": {
+                                  "IDENTIFICADOR": "null"
+                                }
+                              }
+                            },
+                            "PUNTO_Y_COMA": ";"
+                          }
+                        }
+                      },
+                      "INSTRUCCION": {
+                        "DECLARACION": {
+                          "TIPO": "boolean",
+                          "DECLARACIONP": {
+                            "DECLARACIONPP": {
+                              "IDENTIFICADOR": "bandera",
+                              "ASIGNACION": "=",
+                              "EXPRESION": {
+                                "LOGICO": "false"
+                              }
+                            }
+                          },
+                          "PUNTO_Y_COMA": ";"
+                        }
+                      }
+                    },
+                    "INSTRUCCION": {
+                      "IF": {
+                        "RESERVADA": "if",
+                        "CONDICION": {
+                          "PARENTESIS_APERTURA": "(",
+                          "EXPRESION": {
+                            "EXPRESION_IZQ": {
+                              "IDENTIFICADOR": "Primero"
+                            },
+                            "OPERADOR": "!=",
+                            "EXPRESION_DERECHA": {
+                              "IDENTIFICADOR": "null"
+                            }
+                          },
+                          "PARENTESIS_CIERRE": ")"
+                        },
+                        "BLOQUE_INSTRUCCIONES": {
+                          "LLAVE_APERTURA": "{",
+                          "INSTRUCCIONES": {
+                            "INSTRUCCION": {
+                              "WHILE": {
+                                "RESERVADA": "while",
+                                "CONDICION": {
+                                  "PARENTESIS_APERTURA": "(",
+                                  "EXPRESION": {
+                                    "EXPRESION_IZQ": {
+                                      "EXPRESION_IZQ": {
+                                        "IDENTIFICADOR": "actual"
+                                      },
+                                      "OPERADOR": "!=",
+                                      "EXPRESION_DERECHA": {
+                                        "IDENTIFICADOR": "null"
+                                      }
+                                    },
+                                    "OPERADOR": "&&",
+                                    "EXPRESION_DERECHA": {
+                                      "OPERADOR": "!",
+                                      "EXPRESION_DERECHA": {
+                                        "IDENTIFICADOR": "bandera"
+                                      }
+                                    }
+                                  },
+                                  "PARENTESIS_CIERRE": ")"
+                                },
+                                "BLOQUE_INSTRUCCIONES": {
+                                  "LLAVE_APERTURA": "{",
+                                  "INSTRUCCIONES": {
+                                    "INSTRUCCIONES": {
+                                      "INSTRUCCIONES": {
+                                        "INSTRUCCIONES": {
+                                          "INSTRUCCION": {
+                                            "DECLARACION": {
+                                              "TIPO": "String",
+                                              "DECLARACIONP": {
+                                                "DECLARACIONPP": {
+                                                  "IDENTIFICADOR": "carnet",
+                                                  "ASIGNACION": "=",
+                                                  "EXPRESION": {
+                                                    "EXPRESION_IZQ": {
+                                                      "LLAMADA_DE_FUNCION": {
+                                                        "IDENTIFICADOR": "getCarnet",
+                                                        "PARENTESIS_APERTURA": "(",
+                                                        "PARENTESIS_CIERRE": ")"
+                                                      }
+                                                    },
+                                                    "OPERADOR": "+",
+                                                    "EXPRESION_DERECHA": {
+                                                      "CADENA": ""
+                                                    }
+                                                  }
+                                                }
+                                              },
+                                              "PUNTO_Y_COMA": ";"
+                                            }
+                                          }
+                                        },
+                                        "INSTRUCCION": {
+                                          "IF": {
+                                            "RESERVADA": "if",
+                                            "CONDICION": {
+                                              "PARENTESIS_APERTURA": "(",
+                                              "EXPRESION": {
+                                                "LLAMADA_DE_FUNCION": {
+                                                  "IDENTIFICADOR": "equals",
+                                                  "PARENTESIS_APERTURA": "(",
+                                                  "PARAMETROS": {
+                                                    "EXPRESION": {
+                                                      "IDENTIFICADOR": "carnet"
+                                                    }
+                                                  },
+                                                  "PARENTESIS_CIERRE": ")"
+                                                }
+                                              },
+                                              "PARENTESIS_CIERRE": ")"
+                                            },
+                                            "BLOQUE_INSTRUCCIONES": {
+                                              "LLAVE_APERTURA": "{",
+                                              "INSTRUCCIONES": {
+                                                "INSTRUCCIONES": {
+                                                  "INSTRUCCION": {
+                                                    "ASIGNACION_VARIABLE": {
+                                                      "IDENTIFICADOR": "bandera",
+                                                      "ASIGNACION": "=",
+                                                      "EXPRESION": {
+                                                        "LOGICO": "true"
+                                                      },
+                                                      "PUNTO_Y_COMA": ";"
+                                                    }
+                                                  }
+                                                },
+                                                "INSTRUCCION": {
+                                                  "BREAK": {
+                                                    "RESERVADA": "break",
+                                                    "PUNTO_Y_COMA": ";"
+                                                  }
+                                                }
+                                              },
+                                              "LLAVE_CIERRE": "}"
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "INSTRUCCION": {
+                                        "ASIGNACION_VARIABLE": {
+                                          "IDENTIFICADOR": "anterior",
+                                          "ASIGNACION": "=",
+                                          "EXPRESION": {
+                                            "IDENTIFICADOR": "actual"
+                                          },
+                                          "PUNTO_Y_COMA": ";"
+                                        }
+                                      }
+                                    },
+                                    "INSTRUCCION": {
+                                      "ASIGNACION_VARIABLE": {
+                                        "IDENTIFICADOR": "actual",
+                                        "ASIGNACION": "=",
+                                        "EXPRESION": {
+                                          "LLAMADA_DE_FUNCION": {
+                                            "IDENTIFICADOR": "getSiguiente",
+                                            "PARENTESIS_APERTURA": "(",
+                                            "PARENTESIS_CIERRE": ")"
+                                          }
+                                        },
+                                        "PUNTO_Y_COMA": ";"
+                                      }
+                                    }
+                                  },
+                                  "LLAVE_CIERRE": "}"
+                                }
+                              }
+                            }
+                          },
+                          "LLAVE_CIERRE": "}"
+                        }
+                      }
+                    }
+                  },
+                  "INSTRUCCION": {
+                    "IF": {
+                      "RESERVADA": "if",
+                      "CONDICION": {
+                        "PARENTESIS_APERTURA": "(",
+                        "EXPRESION": {
+                          "IDENTIFICADOR": "bandera"
+                        },
+                        "PARENTESIS_CIERRE": ")"
+                      },
+                      "BLOQUE_INSTRUCCIONES": {
+                        "LLAVE_APERTURA": "{",
+                        "INSTRUCCIONES": {
+                          "INSTRUCCION": {
+                            "IF": {
+                              "RESERVADA": "if",
+                              "CONDICION": {
+                                "PARENTESIS_APERTURA": "(",
+                                "EXPRESION": {
+                                  "EXPRESION_IZQ": {
+                                    "IDENTIFICADOR": "actual"
+                                  },
+                                  "OPERADOR": "==",
+                                  "EXPRESION_DERECHA": {
+                                    "IDENTIFICADOR": "Primero"
+                                  }
+                                },
+                                "PARENTESIS_CIERRE": ")"
+                              },
+                              "BLOQUE_INSTRUCCIONES": {
+                                "LLAVE_APERTURA": "{",
+                                "INSTRUCCIONES": {
+                                  "INSTRUCCION": {
+                                    "ASIGNACION_VARIABLE": {
+                                      "IDENTIFICADOR": "Primero",
+                                      "ASIGNACION": "=",
+                                      "EXPRESION": {
+                                        "LLAMADA_DE_FUNCION": {
+                                          "IDENTIFICADOR": "getSiguiente",
+                                          "PARENTESIS_APERTURA": "(",
+                                          "PARENTESIS_CIERRE": ")"
+                                        }
+                                      },
+                                      "PUNTO_Y_COMA": ";"
+                                    }
+                                  }
+                                },
+                                "LLAVE_CIERRE": "}"
+                              },
+                              "ELSE_IF": {
+                                "RESERVADA": "else",
+                                "IF": {
+                                  "RESERVADA": "if",
+                                  "CONDICION": {
+                                    "PARENTESIS_APERTURA": "(",
+                                    "EXPRESION": {
+                                      "EXPRESION_IZQ": {
+                                        "IDENTIFICADOR": "actual"
+                                      },
+                                      "OPERADOR": "==",
+                                      "EXPRESION_DERECHA": {
+                                        "IDENTIFICADOR": "Ultimo"
+                                      }
+                                    },
+                                    "PARENTESIS_CIERRE": ")"
+                                  },
+                                  "BLOQUE_INSTRUCCIONES": {
+                                    "LLAVE_APERTURA": "{",
+                                    "INSTRUCCIONES": {
+                                      "INSTRUCCION": {
+                                        "ASIGNACION_VARIABLE": {
+                                          "IDENTIFICADOR": "Ultimo",
+                                          "ASIGNACION": "=",
+                                          "EXPRESION": {
+                                            "IDENTIFICADOR": "anterior"
+                                          },
+                                          "PUNTO_Y_COMA": ";"
+                                        }
+                                      }
+                                    },
+                                    "LLAVE_CIERRE": "}"
+                                  },
+                                  "ELSE": {
+                                    "RESERVADA": "else",
+                                    "BLOQUE_INSTRUCCIONES": {
+                                      "LLAVE_APERTURA": "{",
+                                      "INSTRUCCIONES": {
+                                        "INSTRUCCION": {
+                                          "LLAMADA_DE_FUNCION": {
+                                            "IDENTIFICADOR": "setSiguiente",
+                                            "PARENTESIS_APERTURA": "(",
+                                            "PARAMETROS": {
+                                              "EXPRESION": {
+                                                "LLAMADA_DE_FUNCION": {
+                                                  "IDENTIFICADOR": "getSiguiente",
+                                                  "PARENTESIS_APERTURA": "(",
+                                                  "PARENTESIS_CIERRE": ")"
+                                                }
+                                              }
+                                            },
+                                            "PARENTESIS_CIERRE": ")",
+                                            "PUNTO_Y_COMA": ";"
+                                          }
+                                        }
+                                      },
+                                      "LLAVE_CIERRE": "}"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "LLAVE_CIERRE": "}"
+                      },
+                      "ELSE": {
+                        "RESERVADA": "else",
+                        "BLOQUE_INSTRUCCIONES": {
+                          "LLAVE_APERTURA": "{",
+                          "INSTRUCCIONES": {
+                            "INSTRUCCION": {
+                              "PRINT": {
+                                "RESERVADA": "System.out.println",
+                                "PARENTESIS_APERTURA": "(",
+                                "EXPRESION": {
+                                  "CADENA": "USUARIO NO ENCOTRADO EN LA LISTA SIMPLE"
+                                },
+                                "PARENTESIS_CIERRE": ")",
+                                "PUNTO_Y_COMA": ";"
+                              }
+                            }
+                          },
+                          "LLAVE_CIERRE": "}"
+                        }
+                      }
+                    }
+                  }
+                },
+                "LLAVE_CIERRE": "}"
+              }
+            }
           }
-        ]
-      ]
+        },
+        "LLAVE_CIERRE": "}"
+      }
     }
-  ]
+  }
 }

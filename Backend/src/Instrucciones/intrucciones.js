@@ -1,67 +1,9 @@
-// Constantes para los tipos de 'instrucciones' válidas en nuestra gramática.
-const TIPO_INSTRUCCION = {
-  IMPORT: "INSTRUCCION_IMPORT",
-  CLASS: "INSTRUCCION_CLASS",
-  DECLARACION: "INSTRUCCION_DECLARACION",
-  ASIGNACION: "INSTRUCCION_ASIGANCION",
-  METODOS: "METODO",
-  FUNCION: "FUNCION",
-  PARAMETROS: "PARAMETRO",
-  IF: "INSTRUCCION_IF",
-  ELSE: "INSTRUCCION_ELSE",
-  SWITCH: "INSTRUCCION_SWITCH",
-  DO_WHILE: "INSTRUCCION_DO_WHILE",
-  WHILE: "INSTRUCCION_WHILE",
-  FOR: "INSTRUCCION_FOR",
-  PRINT: "INSTRUCCION_PRINT",
-  LLAMADA_FUNCIONES: "LLAMADA_A_FUNCION",
-  BREAK: "INSTRUCCION_BREAK",
-  RETURN: "INSTRUCCION_RETURN",
-  CONTINUE: "INSTRUCCION_CONTINUE",
-};
-
-// Constantes para los tipos de 'valores (Expresiones)' que reconoce nuestra gramática.
-const TIPO_VALOR = {
-  NUMERO: "VALOR_NUMERO",
-  IDENTIFICADOR: "VALOR_IDENTIFICADOR",
-  CADENA: "VALOR_CADENA",
-  CARACTER: "VALOR_CARACTER",
-  LOGICO: "VALOR_LOGICO",
-  FUNCION: "VALOR_FUNCION",
-};
-
-// Constantes para los tipos de 'operaciones' que soporta nuestra gramática.
-const TIPO_OPERACION = {
-  SUMA: "OP_SUMA",
-  RESTA: "OP_RESTA",
-  MULTIPLICACION: "OP_MULTIPLICACION",
-  DIVISION: "OP_DIVISION",
-  MODULO: "OP_MODULO",
-  POTENCIA: "OP_POTENCIA",
-  NEGATIVO: "OP_NEGATIVO",
-  NOT: "OP_NOT",
-  AND: "OP_AND",
-  OR: "OP_OR",
-  IGUALDAD: "OP_IGUALDAD",
-  DISTINTO: "OP_DISTINTO",
-  MAYOR_IGUAL_QUE: "OP_MAYOR_IGUAL_QUE",
-  MENOR_IGUAL_QUE: "OP_MENOR_IGUAL_QUE",
-  MAYOR_QUE: "OP_MAYOR_QUE",
-  MENOR_QUE: "OP_MENOR_QUE",
-};
-
-// Constantes para los tipos de opciones en un switch validas en la gramática
-const TIPO_OPCION_SWITCH = {
-  CASE: "CASE",
-  DEFAULT: "DEFAULT",
-};
-
 //Funcion que se encarga de crear nuevos objetos (JSON)
-function nuevaOperacion(operandoIzq, operandoDer, tipo) {
+function nuevaOperacion(operandoIzq, tipo, operandoDer) {
   return {
-    operandoIzq: operandoIzq,
-    operandoDer: operandoDer,
-    operacion: tipo,
+    EXPRESION_IZQ: operandoIzq,
+    OPERADOR: tipo,
+    EXPRESION_DERECHA: operandoDer,
   };
 }
 
@@ -70,210 +12,355 @@ const instruccionesAPI = {
   raiz: function (imports, clases) {
     //RAIZ: [{ imports: imports }, { clases: clases }],
     return {
-      imports: imports,
-      clases: clases,
+      IMPORTS: imports,
+      CLASS: clases,
     };
   },
   //Para los imports
+  inicio_imports: function (importaciones, importacion) {
+    return {
+      IMPORTS: importaciones,
+      IMPORT: importacion,
+    };
+  },
   inst_import: function (identificador) {
     return {
-      tipo: TIPO_INSTRUCCION.IMPORT,
-      identificador: identificador,
+      RESERVADA: "import",
+      IDENTIFICADOR: identificador,
+      PUNTO_Y_COMA: ";",
     };
   },
   //Para las clases
+  inicio_clases: function (clases, clase) {
+    return {
+      CLASS: clases,
+      CLASSP: clase,
+    };
+  },
   inst_class: function (identificador, instrucciones) {
     return {
-      tipo: TIPO_INSTRUCCION.CLASS,
-      identificador: identificador,
-      instrucciones: instrucciones,
+      RESERVADA: "class",
+      IDENTIFICADOR: identificador,
+      BLOQUE_CLASE: {
+        LLAVE_APERTURA: "{",
+        BLOQUE_CLASEP: instrucciones,
+        LLAVE_CIERRE: "}",
+      },
+    };
+  },
+  //Para los bloques de instrucciones de las clases
+  bloque_class: function (clases, clase) {
+    return {
+      BLOQUE_CLASEP: clases,
+      BLOQUE_CLASEPP: clase,
     };
   },
   //Para los tipos de operaciones con signos
-  operacionBinaria: function (operandoIzq, operandoDer, tipo) {
-    return nuevaOperacion(operandoIzq, operandoDer, tipo);
+  operacionBinaria: function (expIzq, expDer, tipo) {
+    return nuevaOperacion(expIzq, tipo, expDer);
   },
   //Para los tipos de operaciones de un solo signo como (! o -)
   operacionUnaria: function (operando, tipo) {
-    return nuevaOperacion(operando, undefined, tipo);
+    return nuevaOperacion(undefined, tipo, operando);
   },
-  //Para los valores como cadena, caracter, numero o logico
-  valor: function (valor, tipo) {
+  //Lista de paramettros
+  lista_expresiones: function (expresiones, coma, expresion) {
     return {
-      tipo: tipo,
-      valor: valor,
+      PARAMETROS: expresiones,
+      COMA: coma,
+      EXPRESION: expresion,
     };
   },
   //Para metodos
   inst_metodos: function (identificador, parametros, instrucciones) {
     return {
-      tipo: TIPO_INSTRUCCION.METODOS,
-      identificador: identificador,
-      parametros: parametros,
-      instrucciones: instrucciones,
+      METODOS: {
+        RESERVADA: "void",
+        IDENTIFICADOR: identificador,
+        PARENTESIS_APERTURA: "(",
+        ASIGNACION_DE_PARAMETROS: parametros,
+        PARENTESIS_CIERRE: ")",
+        BLOQUE_METODO: {
+          LLAVE_APERTURA: "{",
+          INSTRUCCIONES: instrucciones,
+          LLAVE_CIERRE: "}",
+        },
+      },
     };
   },
   //Para Funciones
   inst_funciones: function (tipo, identificador, parametros, instrucciones) {
     return {
-      tipo: TIPO_INSTRUCCION.FUNCION,
-      tipo_funcion: tipo,
-      identificador: identificador,
-      parametros: parametros,
-      instrucciones: instrucciones,
+      FUNCIONES: {
+        TIPO: tipo,
+        IDENTIFICADOR: identificador,
+        PARENTESIS_APERTURA: "(",
+        PARAMETROS: parametros,
+        PARENTESIS_CIERRE: ")",
+        BLOQUE_FUNCION: {
+          LLAVE_APERTURA: "{",
+          INSTRUCCIONES: instrucciones,
+          LLAVE_CIERRE: "}",
+        },
+      },
     };
   },
-  //Casos que iran en la lista de casos o el default
+  //Lista de paramettros
+  lista_parametros: function (parametros, coma, parametro) {
+    return {
+      PARAMETROS: parametros,
+      COMA: coma,
+      PARAMETRO: parametro,
+    };
+  },
+  //Parametros de una funcion o metodo
   parametro: function (tipo, id) {
     return {
-      tipo: TIPO_INSTRUCCION.PARAMETROS,
-      tipo_dato: tipo,
-      identificador: id,
+      TIPO: tipo,
+      IDENTIFICADOR: id,
+    };
+  },
+  //Para las instrucciones
+  bloque_instrucciones: function (instrucciones, instruccion) {
+    return {
+      INSTRUCCIONES: instrucciones,
+      INSTRUCCION: instruccion,
     };
   },
   //Para la sentencia imprimir
   inst_print: function (expresion) {
     return {
-      tipo: TIPO_INSTRUCCION.PRINT,
-      expresion: expresion,
+      PRINT: {
+        RESERVADA: "System.out.println",
+        PARENTESIS_APERTURA: "(",
+        EXPRESION: expresion,
+        PARENTESIS_CIERRE: ")",
+        PUNTO_Y_COMA: ";",
+      },
     };
   },
   //Para la sentencia while
-  inst_while: function (expresion, instrucciones) {
+  inst_while: function (condicion, instrucciones) {
     return {
-      tipo: TIPO_INSTRUCCION.WHILE,
-      expresion: expresion,
-      instrucciones: instrucciones,
+      WHILE: {
+        RESERVADA: "while",
+        CONDICION: condicion,
+        BLOQUE_INSTRUCCIONES: {
+          LLAVE_APERTURA: "{",
+          INSTRUCCIONES: instrucciones,
+          LLAVE_CIERRE: "}",
+        },
+      },
     };
   },
   //Para la sentencia do-while
-  inst_do_while: function (expresion, instrucciones) {
+  inst_do_while: function (instrucciones, condicion) {
     return {
-      tipo: TIPO_INSTRUCCION.DO_WHILE,
-      expresion: expresion,
-      instrucciones: instrucciones,
+      DO_WHILE: {
+        RESERVADA: "do",
+        BLOQUE_INSTRUCCIONES: {
+          LLAVE_APERTURA: "{",
+          INSTRUCCIONES: instrucciones,
+          LLAVE_CIERRE: "}",
+        },
+        WHILE: "while",
+        CONDICION: condicion,
+        PUNTO_Y_COMA: ";",
+      },
     };
   },
   //Para la sentencia do-while
-  inst_for: function (variables, expresion, modificacion, instrucciones) {
+  inst_for: function (
+    declaracion,
+    asignacion,
+    expresion,
+    modificacion,
+    instrucciones
+  ) {
     return {
-      tipo: TIPO_INSTRUCCION.FOR,
-      variables: variables,
-      expresion: expresion,
-      modificacionesVar: modificacion,
-      instrucciones: instrucciones,
+      FOR: {
+        RESERVADA: "for",
+        PARENTESIS_APERTURA: "(",
+        DECLARACION: declaracion,
+        ASIGNACION: asignacion,
+        EXPRESION: expresion,
+        PUNTO_Y_COMA: ";",
+        MODIFICADORES_VAR: modificacion,
+        PARENTESIS_CIERRE: ")",
+        BLOQUE_INSTRUCCIONES: {
+          LLAVE_APERTURA: "{",
+          INSTRUCCIONES: instrucciones,
+          LLAVE_CIERRE: "}",
+        },
+      },
+    };
+  },
+  //Modificador del ciclo for
+  modificador_For: function (modificadores, coma, modificador) {
+    return {
+      MODIFICADORES_VAR: modificadores,
+      COMA: coma,
+      MODIFICADOR_VAR: modificador,
+    };
+  },
+  //Modificacion de variables
+  inst_modificacion: function (identificador, asignacion) {
+    return {
+      IDENTIFICADOR: identificador,
+      ASIGNACION: asignacion,
+    };
+  },
+  //Bloque de declaraciones
+  bloque_declaraciones: function (tipo, listaVariables) {
+    return {
+      DECLARACION: {
+        TIPO: tipo,
+        DECLARACIONP: listaVariables,
+        PUNTO_Y_COMA: ";",
+      },
+    };
+  },
+  //Para las distintas asignaciones
+  bloque_declaracionesP: function (declap, coma, declapp) {
+    return {
+      DECLARACIONP: declap,
+      COMA: coma,
+      DECLARACIONPP: declapp,
     };
   },
   //Para declaracion de variables
-  inst_declaracion: function (tipo, asignacion) {
-    let declaraciones = [];
-    asignacion.forEach((element) => {
-      if (element.expresion === undefined) {
-        declaraciones.push({
-          tipo_dato: tipo,
-          identificador: element.id,
-        });
-      } else {
-        declaraciones.push({
-          tipo_dato: tipo,
-          identificador: element.id,
-          expresion: element.expresion,
-        });
-      }
-    });
+  inst_declaracion: function (identificador, asignacion, expresion) {
     return {
-      tipo: TIPO_INSTRUCCION.DECLARACION,
-      declaraciones: declaraciones,
-    };
-  },
-  //Para la asignacion de las declaraciones
-  asignacion_declaracion: function (id, expresion) {
-    return {
-      id: id,
-      expresion: expresion,
+      IDENTIFICADOR: identificador,
+      ASIGNACION: asignacion,
+      EXPRESION: expresion,
     };
   },
   //Para la asignacion de variables
-  inst_asignacion: function (id, expresion) {
+  inst_asignacion: function (id, asignacion, expresion) {
     return {
-      tipo: TIPO_INSTRUCCION.ASIGNACION,
-      identificador: id,
-      expresion: expresion,
+      ASIGNACION_VARIABLE: {
+        IDENTIFICADOR: id,
+        ASIGNACION: asignacion,
+        EXPRESION: expresion,
+        PUNTO_Y_COMA: ";",
+      },
     };
   },
   //Para la llamada de funciones
-  llamada_funciones: function (identificador, parametros) {
+  llamada_funciones: function (identificador, parametros, p) {
     return {
-      tipo: TIPO_INSTRUCCION.LLAMADA_FUNCIONES,
-      identificador: identificador,
-      parametros: parametros,
+      LLAMADA_DE_FUNCION: {
+        IDENTIFICADOR: identificador,
+        PARENTESIS_APERTURA: "(",
+        PARAMETROS: parametros,
+        PARENTESIS_CIERRE: ")",
+        PUNTO_Y_COMA: p,
+      },
+    };
+  },
+  //Inicio de una instruccion if
+  inicio_if: function (cuerpo) {
+    return {
+      IF: cuerpo,
     };
   },
   //Para la sentecia if
-  inst_if: function (expresion, instrucciones, alternativas) {
+  inst_if: function (condicion, instrucciones, else_if, else_) {
     return {
-      tipo: TIPO_INSTRUCCION.IF,
-      expresion: expresion,
-      instrucciones: instrucciones,
-      alternativas: alternativas,
+      RESERVADA: "if",
+      CONDICION: condicion,
+      BLOQUE_INSTRUCCIONES: {
+        LLAVE_APERTURA: "{",
+        INSTRUCCIONES: instrucciones,
+        LLAVE_CIERRE: "}",
+      },
+      ELSE_IF: else_if,
+      ELSE: else_,
+    };
+  },
+  //Para las condiciones
+  condicion: function (expresion) {
+    return {
+      PARENTESIS_APERTURA: "(",
+      EXPRESION: expresion,
+      PARENTESIS_CIERRE: ")",
+    };
+  },
+  //Para los else_if
+  inst_else_if: function (if_) {
+    return {
+      RESERVADA: "else",
+      IF: if_,
     };
   },
   //Para la sentencia else
   inst_else: function (instrucciones) {
     return {
-      tipo: TIPO_INSTRUCCION.ELSE,
-      instrucciones: instrucciones,
+      RESERVADA: "else",
+      BLOQUE_INSTRUCCIONES: {
+        LLAVE_APERTURA: "{",
+        INSTRUCCIONES: instrucciones,
+        LLAVE_CIERRE: "}",
+      },
     };
   },
   //Para la sentencia switch
-  inst_switch: function (expresion, casos) {
+  inst_switch: function (condicion, casos) {
     return {
-      tipo: TIPO_INSTRUCCION.SWITCH,
-      expresion: expresion,
-      casos: casos,
+      SWITCH: {
+        RESERVADA: "switch",
+        CONDICION: condicion,
+        LLAVE_APERTURA: "{",
+        CASOS: casos,
+        LLAVE_CIERRE: "}",
+      },
     };
   },
   //Para la lista de casos en la sentencia switch
-  listaCasos: function (caso) {
-    var casos = [];
-    casos.push(caso);
-    return casos;
+  listaCasos: function (casos, caso) {
+    return {
+      CASOS: casos,
+      CASO: caso,
+    };
   },
   //Casos que iran en la lista de casos o el default
-  caso: function (tipo, expresion, instrucciones) {
-    if (tipo === 0) {
-      tipo = TIPO_OPCION_SWITCH.CASE;
-    } else {
-      tipo = TIPO_OPCION_SWITCH.DEFAULT;
-    }
+  caso: function (reservada, expresion, instrucciones) {
     return {
-      tipo: tipo,
-      expresion: expresion,
-      instrucciones: instrucciones,
+      RESERVADA: reservada,
+      EXPRESION: expresion,
+      DOS_PUNTOS: ":",
+      INSTRUCCIONES: instrucciones,
     };
   },
   //Para los continue
   continues: function () {
     return {
-      tipo: TIPO_INSTRUCCION.CONTINUE,
+      CONTINUE: {
+        RESERVADA: "continue",
+        PUNTO_Y_COMA: ";",
+      },
     };
   },
   //Para los break
   breaks: function () {
     return {
-      tipo: TIPO_INSTRUCCION.BREAK,
+      BREAK: {
+        RESERVADA: "break",
+        PUNTO_Y_COMA: ";",
+      },
     };
   },
   //Para los return
-  returns: function (valor) {
+  returns: function (expresion) {
     return {
-      tipo: TIPO_INSTRUCCION.RETURN,
-      valor: valor,
+      RETURN: {
+        RESERVADA: "return",
+        EXPRESION: expresion,
+        PUNTO_Y_COMA: ";",
+      },
     };
   },
 };
 
-// Exportamos nuestras constantes y nuestra API
-module.exports.TIPO_OPEARACION = TIPO_OPERACION;
-module.exports.TIPO_VALOR = TIPO_VALOR;
 module.exports.instruccionesAPI = instruccionesAPI;
