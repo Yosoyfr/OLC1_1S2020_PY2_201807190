@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="css/style.css" type="text/css" />
   <title>ANTENNAE Java</title>
   <script src="https://kit.fontawesome.com/97019646c2.js"></script>
+  <script type="text/javascript" src="./js/json-viewer/json-viewer.js"></script>
+  <link rel="stylesheet" type="text/css" href="./js/json-viewer/json-viewer.css">
 </head>
 
 <body>
@@ -27,7 +29,7 @@
               class="fas fa-play-circle fa-lg"></i></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" id="btn-analizar">Arbol AST <i class="fas fa-server fa-lg"></i></a>
+          <a class="nav-link" href="#" id="btn-ast">Arbol AST <i class="fas fa-server fa-lg"></i></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#" data-toggle="modal" data-target="#myModal">About <i
@@ -42,7 +44,7 @@
     <!--Area para el archivo A-->
     <div class="row justify-content-md-center mb-3">
       <!--Area del editor de texto-->
-      <div class="col-md-8">
+      <div class="col-md-9">
         <ul class="nav nav-tabs border-primary" id="myTabsA">
           <li class="nav-item">
             <a class="nav-link active" data-toggle="tab" href="#homeA">Home</a>
@@ -54,7 +56,7 @@
         </ul>
         <div id="myTabContentA" class="tab-content">
           <div class="tab-pane fade show active" id="homeA">
-            <div class="list-group" id="txtA0">
+            <div class="list-group" id="undefined">
               <h1 class="display-3">Antennae!! "comparador de archivos de lenguaje Java"!</h1>
               <p class="lead">Simple comparador entre dos archivos en lenguaje java, para identificar copias (Variables,
                 Clases y Funciones) y generar Arbol AST.</p>
@@ -69,7 +71,7 @@
         <h5>Archivo A</h5>
         <br>
         <!--Ralizar analisis-->
-        <button type="button" class="btn btn-default btn-circle btn-xl">
+        <button type="button" class="btn btn-default btn-circle btn-xl" id="btn-analisis-a">
           <i class="fas fa-code"></i>
         </button>
         <!--Guardar archivo-->
@@ -91,7 +93,7 @@
     <!--Area para el archivo B-->
     <div class="row justify-content-md-center">
       <!--Area del editor de texto-->
-      <div class="col-md-8">
+      <div class="col-md-9">
         <ul class="nav nav-tabs border-primary" id="myTabsb">
           <li class="nav-item">
             <a class="nav-link active" data-toggle="tab" href="#homeB">Home</a>
@@ -118,7 +120,7 @@
         <h5>Archivo B</h5>
         <br>
         <!--Ralizar analisis-->
-        <button type="button" class="btn btn-default btn-circle btn-xl">
+        <button type="button" class="btn btn-default btn-circle btn-xl" id="btn-analisis-b">
           <i class="fas fa-code"></i>
         </button>
         <!--Guardar archivo-->
@@ -140,8 +142,9 @@
     <hr class="my-4" />
 
     <!--Area de salida-->
+    <!--Reportex-->
     <div class="row justify-content-md-center">
-      <div class="col-md-6">
+      <div class="col-md-10">
         <h2>Reportes</h2>
         <ul class="nav nav-tabs">
           <li class="nav-item">
@@ -194,8 +197,12 @@
           </div>
         </div>
       </div>
-      <div class="col-md-4">
+    </div>
+    <!--Arbol AST-->
+    <div class="row justify-content-md-center">
+      <div class="col-md-10">
         <h2>Arbol AST</h2>
+        <div id="json"></div>
       </div>
     </div>
   </div>

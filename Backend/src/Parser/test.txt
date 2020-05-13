@@ -9,7 +9,7 @@ class OperacionDATA {
     int a = 5;
     String segundoParam = "Usted no \" anda fresco";
     char caracter = '#';
-    boolean booleano = false;
+    boolean booleano = false
     double valor_doble = 15.56;
     int _hola, Primero, Ultimo;
     int numero,no1 = 8, no2 = 4, no3;

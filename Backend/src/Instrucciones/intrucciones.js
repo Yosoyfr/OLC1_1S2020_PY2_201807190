@@ -12,8 +12,10 @@ const instruccionesAPI = {
   raiz: function (imports, clases) {
     //RAIZ: [{ imports: imports }, { clases: clases }],
     return {
-      IMPORTS: imports,
-      CLASS: clases,
+      RAIZ: {
+        IMPORTS: imports,
+        CLASS: clases,
+      },
     };
   },
   //Para los imports

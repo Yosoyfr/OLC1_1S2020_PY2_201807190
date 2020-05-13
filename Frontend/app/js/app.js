@@ -117,7 +117,6 @@ function saveDocument(value_Txt, aux_Nombre) {
   var a = document.createElement("a");
   document.body.appendChild(a);
   a.style = "display: none";
-
   // actualizas los parámetros del enlace para descargar el fichero creado
   a.href = url;
   a.download = file.name;
@@ -155,10 +154,8 @@ var tabsB = 1;
 function addNewTabB() {
   var self = this;
   var addTab = document.getElementById("addTabIconB");
-
   //Obtenemos el div donde se encuentras las referencias de los tabs
   let tabs_Content = document.getElementById("myTabContentB");
-
   insertTab(self, this.tabsB, tabs_Content, addTab, "txtB", "EditorB");
   //Sumamos uno mas al valor de pestañas
   this.tabsB++;
@@ -246,18 +243,79 @@ function run() {
   fetch(url)
     .then((respuesta) => respuesta.json())
     .then((respuesta) => console.log(respuesta));
+}
 
+//Geracion del treeview apartir del arbol AST que me devuelve la peticion al servidor
+var jsonObj = {};
+var jsonViewer = new JSONViewer();
+document.querySelector("#json").appendChild(jsonViewer.getContainer());
+
+//Funcion para parsear el texto y convertirlo en un formato JSON
+var setJSON = function (valueJSON) {
+  try {
+    jsonObj = JSON.parse(valueJSON);
+  } catch (err) {
+    alert(err);
+  }
+};
+
+//Asignamos el boton para cargar el arbol
+var loadJsonBtn = document.querySelector("#btn-ast");
+loadJsonBtn.addEventListener("click", function () {
+  setJSON();
+  jsonViewer.showJSON(jsonObj);
+});
+
+//Funcion POST hacia el servidor
+async function postData(txt) {
   url = "http://localhost:3000/parser";
-  var data = { username: "example" };
-
-  fetch(url, {
-    method: "POST", // or 'PUT'
-    body: JSON.stringify(data), // data can be `string` or {object}!
+  const data = { text: txt };
+  const ast = await fetch(url, {
+    method: "POST",
+    body: JSON.stringify(data),
     headers: {
       "Content-Type": "application/json",
     },
   })
     .then((res) => res.json())
     .catch((error) => console.error("Error:", error))
-    .then((response) => console.log("Success:", response));
+    .then((response) => {
+      console.log("Success:", response.message);
+      return response.AST;
+    });
+  return ast;
 }
+
+//Funcion para enviarle el texto del editor al parser en node
+function getCodeA() {
+  if (select_TabA !== "") {
+    getCode(select_TabA);
+  }
+}
+
+function getCodeB() {
+  if (select_TabB !== "") {
+    getCode(select_TabB);
+  }
+}
+
+//funcion para mostrar arbol ast
+async function getCode(select_Tab) {
+  //Seleccionamos el texto de la pestaña seleccionada
+  let editor = ace.edit(select_Tab);
+  //Obtenemos el texto
+  let value_Txt = editor.getSession().getValue();
+  if (value_Txt !== (undefined || "")) {
+    const ast = await postData(value_Txt);
+    setJSON(ast);
+    jsonViewer.showJSON(jsonObj);
+  } else {
+    jsonViewer.showJSON(null);
+  }
+}
+
+//Carga el codigo en el editor de texto
+const loadCodeA = document.querySelector("#btn-analisis-a");
+loadCodeA.addEventListener("click", getCodeA);
+const loadCodeB = document.querySelector("#btn-analisis-b");
+loadCodeB.addEventListener("click", getCodeB);

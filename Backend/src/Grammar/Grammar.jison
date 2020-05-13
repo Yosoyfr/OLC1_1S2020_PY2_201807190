@@ -112,7 +112,6 @@ INICIO
 	| IMPORTS EOF {return instruccionesAPI.raiz($1, undefined);}
 	| IMPORTS CLASS EOF {return instruccionesAPI.raiz($1, $2);}
 	| CLASS EOF {return instruccionesAPI.raiz(undefined, $1);}
-	| error { console.error('Este es un error sintáctico: ' + yytext + ', en la linea: ' + this._$.first_line + ', en la columna: ' + this._$.first_column); }
 ;
 
 //Imports de clases
@@ -200,7 +199,7 @@ INSTRUCCION
 	| PRINT { $$ = $1; }
 	| DECLARACION { $$ = $1; }
 	| ASIGNACION { $$ = $1; }
-	| error PUNTOYCOMA { console.error('Este es un error sintáctico: ' + yytext + ', en la linea: ' + this._$.first_line + ', en la columna: ' + this._$.first_column); }
+	| error { console.error('Este es un error sintáctico: ' + yytext + ', en la linea: ' + this._$.first_line + ', en la columna: ' + this._$.first_column); }
 	;
 
 //Instruccion print
@@ -211,6 +210,7 @@ PRINT
 //Instruccion declaracion de variables
 DECLARACION 
 	: TIPO DECLARACIONP PUNTOYCOMA { $$ = instruccionesAPI.bloque_declaraciones($1, $2); }
+	| error PUNTOYCOMA { console.error('Este es un error sintáctico: ' + yytext + ', en la linea: ' + this._$.first_line + ', en la columna: ' + this._$.first_column); }
 	;
 
 DECLARACIONP 

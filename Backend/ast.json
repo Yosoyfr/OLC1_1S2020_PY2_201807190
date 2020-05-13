@@ -1,0 +1,16 @@
+{
+  "IMPORTS": {
+    "IMPORTS": {
+      "IMPORT": {
+        "RESERVADA": "import",
+        "IDENTIFICADOR": "a",
+        "PUNTO_Y_COMA": ";"
+      }
+    },
+    "IMPORT": {
+      "RESERVADA": "import",
+      "IDENTIFICADOR": "b",
+      "PUNTO_Y_COMA": ";"
+    }
+  }
+}
