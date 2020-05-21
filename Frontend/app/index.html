@@ -142,7 +142,7 @@
     <hr class="my-4" />
 
     <!--Area de salida-->
-    <!--Reportex-->
+    <!--Reportes-->
     <div class="row justify-content-md-center">
       <div class="col-md-10">
         <h2>Reportes</h2>
@@ -165,11 +165,19 @@
         </ul>
         <div id="reports" class="tab-content">
           <div class="tab-pane fade active show" id="reporteErrores">
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit sunt perferendis a est cumque? Sit magni
-              eaque dignissimos veniam. A culpa accusantium pariatur, blanditiis voluptatum consequatur itaque veniam
-              laborum repellat.
-            </p>
+            <table class="table table-hover">
+              <thead>
+                <tr class="table-primary">
+                  <th scope="col"> # </th>
+                  <th scope="col"> Linea </th>
+                  <th scope="col"> Columna </th>
+                  <th scope="col" style="width: 25%"> Tipo error </th>
+                  <th scope="col" style="width: 40%"> Descripcion </th>
+                </tr>
+              </thead>
+              <tbody id="tabla-errores">
+              </tbody>
+            </table>
           </div>
           <div class="tab-pane fade" id="reporteClases">
             <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro

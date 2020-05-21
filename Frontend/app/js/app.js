@@ -281,7 +281,7 @@ async function postData(txt) {
     .catch((error) => console.error("Error:", error))
     .then((response) => {
       console.log("Success:", response.message);
-      return response.AST;
+      return response;
     });
   return ast;
 }
@@ -306,9 +306,64 @@ async function getCode(select_Tab) {
   //Obtenemos el texto
   let value_Txt = editor.getSession().getValue();
   if (value_Txt !== (undefined || "")) {
-    const ast = await postData(value_Txt);
-    setJSON(ast);
+    //Le enviamos el archivo de texto para que sea parseado por nuestro analizador en el backend
+    const analisis = await postData(value_Txt);
+    //Recibimos el AST
+    setJSON(analisis.AST);
     jsonViewer.showJSON(jsonObj);
+    //Recibimos los errores
+    let Lista_de_Errores_HTML = "";
+    const Lista_de_Errores = JSON.parse(analisis.ERRORES);
+    const tabla_Errores = document.getElementById("tabla-errores");
+    tabla_Errores.innerHTML = "";
+    for (let i = 0; i < Lista_de_Errores.length; i++) {
+      if (Lista_de_Errores[i].TIPO === "Lexico") {
+        Lista_de_Errores_HTML =
+          '<tr class="table-warning">\n' +
+          '<th scope="row">' +
+          (i + 1) +
+          "</th>\n" +
+          "<td>" +
+          Lista_de_Errores[i].LINEA +
+          "</td>\n" +
+          "<td>" +
+          Lista_de_Errores[i].COLUMNA +
+          "</td>\n" +
+          "<td>" +
+          Lista_de_Errores[i].TIPO +
+          "</td>\n" +
+          "<td>" +
+          "El lexema '" +
+          Lista_de_Errores[i].ENCONTRADO +
+          "' no pertenece al lenguaje." +
+          "</td>\n" +
+          "</tr>";
+      } else {
+        Lista_de_Errores_HTML =
+          '<tr class="table-danger">\n' +
+          '<th scope="row">' +
+          (i + 1) +
+          "</th>\n" +
+          "<td>" +
+          Lista_de_Errores[i].LINEA +
+          "</td>\n" +
+          "<td>" +
+          Lista_de_Errores[i].COLUMNA +
+          "</td>\n" +
+          "<td>" +
+          Lista_de_Errores[i].TIPO +
+          "</td>\n" +
+          "<td>" +
+          "Se esperaba '" +
+          Lista_de_Errores[i].ESPERADO +
+          "', (Se encontro " +
+          Lista_de_Errores[i].ENCONTRADO +
+          ")." +
+          "</td>\n" +
+          "</tr>";
+      }
+      tabla_Errores.innerHTML = Lista_de_Errores_HTML;
+    }
   } else {
     jsonViewer.showJSON(null);
   }

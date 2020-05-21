@@ -7,6 +7,8 @@ function nuevaOperacion(operandoIzq, tipo, operandoDer) {
   };
 }
 
+//lISTA DE ERRORES
+var Lista_Errores = new Array();
 const instruccionesAPI = {
   //Raiz del archivo
   raiz: function (imports, clases) {
@@ -362,6 +364,28 @@ const instruccionesAPI = {
         PUNTO_Y_COMA: ";",
       },
     };
+  },
+  //Para los errores
+  errorLS: function (tipo, esperado, encontrado, linea, columna) {
+    return {
+      TIPO: tipo,
+      ESPERADO: esperado,
+      ENCONTRADO: encontrado,
+      LINEA: linea,
+      COLUMNA: columna,
+    };
+  },
+  //Setear la lista de Errores
+  setLista: function () {
+    Lista_Errores = new Array();
+  },
+  //Setear la lista de Errores
+  getLista: function () {
+    return Lista_Errores;
+  },
+  //Pushear la lista
+  pushLista: function (element) {
+    Lista_Errores.push(element);
   },
 };
 

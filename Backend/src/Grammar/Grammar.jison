@@ -82,7 +82,7 @@
 
 
 <<EOF>>				return 'EOF';
-.					{ console.error('Este es un error léxico: ' + yytext + ', en la linea: ' + yylloc.first_line + ', en la columna: ' + yylloc.first_column); }
+.					{ console.error('Este es un error léxico: ' + yytext + ', en la linea: ' + yylloc.first_line + ', en la columna: ' + yylloc.first_column); instruccionesAPI.pushLista(instruccionesAPI.errorLS("Lexico", undefined, yytext, yylloc.first_line, yylloc.first_column)); }
 
 /lex
 
@@ -106,12 +106,13 @@
 %% /* Definición de la gramática */
 
 //Metodo de inicio de la gramatica
-// cuado se haya reconocido la entrada completa retornamos el AST
+//Retornaremos el ast y los errores
+// Cuado se haya reconocido la entrada completa retornamos el AST
 INICIO
-	: EOF
-	| IMPORTS EOF {return instruccionesAPI.raiz($1, undefined);}
-	| IMPORTS CLASS EOF {return instruccionesAPI.raiz($1, $2);}
-	| CLASS EOF {return instruccionesAPI.raiz(undefined, $1);}
+	: EOF {return {AST: instruccionesAPI.raiz(undefined, undefined), ERRORES: instruccionesAPI.getLista()};}
+	| IMPORTS EOF {return {AST: instruccionesAPI.raiz($1, undefined), ERRORES: instruccionesAPI.getLista()};}
+	| IMPORTS CLASS EOF {return {AST: instruccionesAPI.raiz($1, $2), ERRORES: instruccionesAPI.getLista()};}
+	| CLASS EOF {return {AST: instruccionesAPI.raiz(undefined, $1), ERRORES: instruccionesAPI.getLista()};}
 ;
 
 //Imports de clases
@@ -122,7 +123,7 @@ IMPORTS
 
 IMPORT
 	:IDENTIFICADOR PUNTOYCOMA { $$ = instruccionesAPI.inst_import($1); }
-	|error PUNTOYCOMA { console.error('Este es un error sintáctico: ' + yytext + ', en la linea: ' + this._$.first_line + ', en la columna: ' + this._$.first_column); }
+	|error PUNTOYCOMA { console.error('Este es un error sintáctico: ' + yy.parser.hash.token +  ', en la linea: ' + @1.first_line + ', en la columna: ' + @1.first_column + " se esperaba: " + yy.parser.hash.expected ); instruccionesAPI.pushLista(instruccionesAPI.errorLS("Sintactico", yy.parser.hash.expected, yy.parser.hash.token, @1.first_line, @1.first_column)); }
 	;
 
 //Metodo para el analisis de clases
@@ -139,6 +140,7 @@ CLASSP
 BLOQUE_CLASE
 	: LLAVEIZQUIERDA BLOQUE_CLASEP LLAVEDERECHA { $$ = $2; }
 	| LLAVEIZQUIERDA LLAVEDERECHA { $$ = undefined; }
+	| LLAVEIZQUIERDA error LLAVEDERECHA { console.error('Este es un error sintáctico: ' + yy.parser.hash.token +  ', en la linea: ' + @1.first_line + ', en la columna: ' + @1.first_column + " se esperaba: " + yy.parser.hash.expected ); instruccionesAPI.pushLista(instruccionesAPI.errorLS("Sintactico", yy.parser.hash.expected, yy.parser.hash.token, @1.first_line, @1.first_column)); }
 	;
 
 BLOQUE_CLASEP
@@ -199,7 +201,7 @@ INSTRUCCION
 	| PRINT { $$ = $1; }
 	| DECLARACION { $$ = $1; }
 	| ASIGNACION { $$ = $1; }
-	| error { console.error('Este es un error sintáctico: ' + yytext + ', en la linea: ' + this._$.first_line + ', en la columna: ' + this._$.first_column); }
+	| error { console.error('Este es un error sintáctico: ' + yy.parser.hash.token +  ', en la linea: ' + @1.first_line + ', en la columna: ' + @1.first_column + " se esperaba: " + yy.parser.hash.expected ); instruccionesAPI.pushLista(instruccionesAPI.errorLS("Sintactico", yy.parser.hash.expected, yy.parser.hash.token, @1.first_line, @1.first_column)); }
 	;
 
 //Instruccion print
@@ -210,7 +212,7 @@ PRINT
 //Instruccion declaracion de variables
 DECLARACION 
 	: TIPO DECLARACIONP PUNTOYCOMA { $$ = instruccionesAPI.bloque_declaraciones($1, $2); }
-	| error PUNTOYCOMA { console.error('Este es un error sintáctico: ' + yytext + ', en la linea: ' + this._$.first_line + ', en la columna: ' + this._$.first_column); }
+	| error PUNTOYCOMA { console.error('Este es un error sintáctico: ' + yy.parser.hash.token +  ', en la linea: ' + @1.first_line + ', en la columna: ' + @1.first_column + " se esperaba: " + yy.parser.hash.expected ); instruccionesAPI.pushLista(instruccionesAPI.errorLS("Sintactico", yy.parser.hash.expected, yy.parser.hash.token, @1.first_line, @1.first_column)); }
 	;
 
 DECLARACIONP 
