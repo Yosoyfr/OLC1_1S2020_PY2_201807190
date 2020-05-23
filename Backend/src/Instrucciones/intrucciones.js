@@ -82,7 +82,7 @@ const instruccionesAPI = {
         RESERVADA: "void",
         IDENTIFICADOR: identificador,
         PARENTESIS_APERTURA: "(",
-        ASIGNACION_DE_PARAMETROS: parametros,
+        PARAMETROS: parametros,
         PARENTESIS_CIERRE: ")",
         BLOQUE_METODO: {
           LLAVE_APERTURA: "{",

@@ -9,7 +9,7 @@ class OperacionDATA {
     int a = 5;
     String segundoParam = "Usted no \" anda fresco";
     char caracter = '#';
-    boolean booleano = false
+    boolean booleano = false;
     double valor_doble = 15.56;
     int _hola, Primero, Ultimo;
     int numero,no1 = 8, no2 = 4, no3;
@@ -117,6 +117,29 @@ class OperacionDATA {
         else{
 			System.out.println("USUARIO NO ENCOTRADO EN LA LISTA SIMPLE");
 		}
+    }
+}
+
+
+
+
+ class OperacionDATA {
+    int a = 5;
+    void main(){
+        int a = 0;
+        int frescura2 = - 5 * - funcion_int(no1, frescura) + 9;
+    }
+    void NoDevuelvoNada(int c){
+        System.out.println("NO DEVUELVO NADA");
+    }
+    String funcion_string(){
+        return "";
+    }
+    int funcion_int(int numeor1, String frescura){
+      
+    }
+    void eliminarUsuario(String busqueda){
+        int actual = Primero;
     }
 }
 

@@ -238,11 +238,80 @@ function changeTab(id) {
   }
 }
 
-function run() {
-  let url = "http://localhost:3000/";
-  fetch(url)
-    .then((respuesta) => respuesta.json())
-    .then((respuesta) => console.log(respuesta));
+async function run() {
+  //Seleccionamos el texto de la pestaña seleccionada
+  let editorA = ace.edit(select_TabA);
+  let editorB = ace.edit(select_TabB);
+  //Obtenemos el texto
+  let value_TxtA = editorA.getSession().getValue();
+  let value_TxtB = editorB.getSession().getValue();
+
+  const copias = await postCopy(value_TxtA, value_TxtB);
+  //Mostrar los metodos en el frontend
+  let Metodos_HTML_Original = "";
+  let Metodos_HTML_Copia = "";
+  const Lista_de_Metodos = copias.COPIAS.METODOS;
+  const tabla_Original = document.getElementById("div-originales");
+  const tabla_Copia = document.getElementById("div-copias");
+  tabla_Original.innerHTML = "";
+  tabla_Copia.innerHTML = "";
+  Lista_de_Metodos.forEach((metodo, i) => {
+    Metodos_HTML_Original += `<a href="#" class="list-group-item list-group-item-action flex-column align-items-start active"><div class="d-flex w-100 justify-content-between"> <h5 class="mb-1">Nombre del Metodo: ${metodo.METODO_ORIGINAL.identificador}</h5><small>Clase que pertenece: ${metodo.METODO_ORIGINAL.clase}</small></div><span>Lista de Parametros</span>`;
+    if (metodo.METODO_ORIGINAL.parametros.length === 0) {
+      Metodos_HTML_Original += "<br>";
+    }
+    metodo.METODO_ORIGINAL.parametros.forEach((parametro) => {
+      Metodos_HTML_Original += `<p class="mb-1">Parametro => Tipo: ${parametro.tipo} - ID: ${parametro.identificador}</p>`;
+    });
+
+    Metodos_HTML_Original += `<small>Tipo de Retorno: ${metodo.METODO_ORIGINAL.tipo}</small></a>`;
+
+    Metodos_HTML_Copia += `<a href="#" class="list-group-item list-group-item-action flex-column align-items-start"><div class="d-flex w-100 justify-content-between"> <h5 class="mb-1">Nombre del Metodo: ${metodo.METODO_COPIA.identificador}</h5><small>Clase que pertenece: ${metodo.METODO_COPIA.clase}</small></div><span>Lista de Parametros</span>`;
+    if (metodo.METODO_COPIA.parametros.length === 0) {
+      Metodos_HTML_Copia += "<br>";
+    }
+    metodo.METODO_COPIA.parametros.forEach((parametro) => {
+      Metodos_HTML_Copia += `<p class="mb-1">Parametro => Tipo: ${parametro.tipo} - ID: ${parametro.identificador}</p>`;
+    });
+
+    Metodos_HTML_Copia += `<small>Tipo de Retorno: ${metodo.METODO_COPIA.tipo}</small></a>`;
+  });
+  tabla_Original.innerHTML = Metodos_HTML_Original;
+  tabla_Copia.innerHTML = Metodos_HTML_Copia;
+
+  //Mostrar las clases en frontend
+  let Clases_HTML = "";
+  const Lista_de_Clases = copias.COPIAS.CLASES;
+  const tabla_Clases = document.getElementById("tabla-clases");
+  tabla_Clases.innerHTML = "";
+  Lista_de_Clases.forEach((clase, i) => {
+    Clases_HTML += `<tr class="table-info">
+                  <th scope="row">${i + 1}</th>
+                  <td> ${clase.CLASE_ORIGINAL.nombre} </td>
+                  <td> ${clase.CLASE_ORIGINAL.metodos} </td>
+                </tr>`;
+  });
+  tabla_Clases.innerHTML = Clases_HTML;
+}
+
+//Funcion POST hacia el servidor
+async function postCopy(ori, cop) {
+  url = "http://localhost:3000/copias";
+  const data = { original: ori, copia: cop };
+  const copias = await fetch(url, {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .catch((error) => console.error("Error:", error))
+    .then((response) => {
+      console.log("Success:", response.message);
+      return response;
+    });
+  return copias;
 }
 
 //Geracion del treeview apartir del arbol AST que me devuelve la peticion al servidor
@@ -258,13 +327,6 @@ var setJSON = function (valueJSON) {
     alert(err);
   }
 };
-
-//Asignamos el boton para cargar el arbol
-var loadJsonBtn = document.querySelector("#btn-ast");
-loadJsonBtn.addEventListener("click", function () {
-  setJSON();
-  jsonViewer.showJSON(jsonObj);
-});
 
 //Funcion POST hacia el servidor
 async function postData(txt) {
