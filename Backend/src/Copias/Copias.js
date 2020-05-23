@@ -166,6 +166,11 @@ const Copias = {
     return Metodos_Copia;
   },
 
+  /**
+   * Funcion que verifica que el metodo posee coincidencias en parametros
+   * @param {Lista de parametros } original
+   * @param {Lista de parametros } copia
+   */
   compareParametros: function (original, copia) {
     let copiasEncontradas = 0;
     for (let i = 0; i < original.length; i++) {
